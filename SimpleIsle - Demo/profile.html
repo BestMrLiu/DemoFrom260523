@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的主页 - SimpleIsle</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+body{background:var(--cream)}.page-wrap{padding-top:64px}
+.page-hero{background:var(--charcoal);padding:60px 0 0}
+.page-inner{max-width:1100px;margin:0 auto;padding:0 24px}
+.profile-row{display:flex;align-items:flex-end;gap:24px;padding-bottom:24px}
+.profile-avatar-wrap{position:relative;flex-shrink:0}
+.profile-avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:4px solid white;box-shadow:var(--shadow-sm)}
+.profile-avatar-edit{position:absolute;bottom:2px;right:2px;width:28px;height:28px;border-radius:50%;background:var(--sage);color:white;border:2px solid white;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem}
+.profile-info{flex:1;color:white}
+.profile-name{font-family:var(--font-serif);font-size:1.5rem;font-weight:600;margin-bottom:4px}
+.profile-bio{font-size:.85rem;color:rgba(250,247,242,.7);margin-bottom:12px;font-weight:300}
+.profile-tags{display:flex;gap:6px;flex-wrap:wrap}
+.profile-tag{padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8)}
+.profile-stats-row{display:flex;border-top:1px solid rgba(255,255,255,.1)}
+.profile-stat{flex:1;text-align:center;padding:16px;border-right:1px solid rgba(255,255,255,.1);cursor:pointer;transition:background .2s}
+.profile-stat:hover{background:rgba(255,255,255,.05)}
+.profile-stat:last-child{border-right:none}
+.profile-stat-val{font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:white}
+.profile-stat-l{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:2px}
+.profile-tabs{background:white;border-radius:16px 16px 0 0;display:flex;padding:0 24px;margin-top:24px}
+.profile-tab{padding:14px 24px;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;color:#999;font-family:var(--font-sans);border-top:none;border-left:none;border-right:none;background:transparent}
+.profile-tab:hover{color:#333}
+.profile-tab.active{color:#3A3632;border-bottom-color:#3A3632}
+.profile-content{padding:24px 0 60px}
+.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.profile-card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-xs);transition:all .25s ease;cursor:pointer}
+.profile-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.profile-card-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:transform .4s ease}
+.profile-card:hover .profile-card-img{transform:scale(1.04)}
+.profile-card-body{padding-bottom:12px}
+.profile-card-title{font-size:.88rem;font-weight:500;padding:12px 12px 4px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.profile-card-meta{font-size:.72rem;color:#999;padding:0 12px 12px;display:flex;gap:10px}
+.profile-empty{grid-column:1/-1;text-align:center;padding:80px 20px;color:#999}
+.profile-empty-icon{font-size:3.5rem;margin-bottom:16px;opacity:.5}
+.profile-empty h3{font-family:var(--font-serif);font-size:1.1rem;margin-bottom:8px;color:#333}
+.hidden{display:none}
+@media(max-width:768px){.profile-grid{grid-template-columns:repeat(2,1fr)}.profile-row{flex-direction:column;align-items:flex-start}}
+</style>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-logo"><div class="logo-icon">岛</div>SimpleIsle</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="explore.html">探索</a></li><li><a href="principles.html">原则</a></li><li><a href="collection.html">收藏</a></li><li><a href="about.html">关于</a></li></ul><div class="nav-actions"><a href="post.html" class="btn btn-primary btn-sm">发布</a><a href="login.html"><img src="images/avatar1.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--warm-gray-light)"></a></div></div></nav>
+<div class="page-wrap">
+<div class="page-hero">
+<div class="page-inner">
+<div class="profile-row">
+<div class="profile-avatar-wrap">
+<img src="images/avatar1.jpg" class="profile-avatar" alt="">
+<div class="profile-avatar-edit">✏️</div>
+</div>
+<div class="profile-info">
+<div class="profile-name">林小简 👑</div>
+<div class="profile-bio">断舍离实践者，极简生活倡导者 🌿</div>
+<div class="profile-tags">
+<span class="profile-tag">🌱 物质极简</span>
+<span class="profile-tag">🏙️ 上海</span>
+</div>
+</div>
+<a href="settings.html" class="btn btn-ghost btn-sm" style="color:white;border-color:rgba(255,255,255,.3);margin-left:auto">编辑资料</a>
+</div>
+<div class="profile-stats-row">
+<div class="profile-stat"><div class="profile-stat-val">48</div><div class="profile-stat-l">发布</div></div>
+<div class="profile-stat"><div class="profile-stat-val">28.6万</div><div class="profile-stat-l">获赞</div></div>
+<div class="profile-stat"><div class="profile-stat-val">1.2万</div><div class="profile-stat-l">粉丝</div></div>
+<div class="profile-stat"><div class="profile-stat-val">326</div><div class="profile-stat-l">关注</div></div>
+</div>
+</div>
+<div class="profile-tabs">
+<button class="profile-tab active" onclick="switchTab(this,'posts')">📒 发布</button>
+<button class="profile-tab" onclick="switchTab(this,'likes')">❤️ 收藏</button>
+<button class="profile-tab" onclick="switchTab(this,'following')">👥 关注</button>
+</div>
+</div>
+<div class="container">
+<div class="profile-content">
+<div class="profile-grid" id="posts-grid">
+<div class="profile-card" onclick="location.href='detail.html'"><img src="images/room1.jpg" class="profile-card-img" alt=""><div class="profile-card-body"><div class="profile-card-title">断舍离三个月后，我家空无一物，却感到前所未有的丰盈</div><div class="profile-card-meta"><span>❤️ 2.1万</span><span>💬 386</span></div></div></div>
+<div class="profile-card" onclick="location.href='detail.html'"><img src="images/plant1.jpg" class="profile-card-img" alt=""><div class="profile-card-body"><div class="profile-card-title">出租屋改造：把6平米小房间变成精神角落</div><div class="profile-card-meta"><span>❤️ 1.8万</span><span>💬 256</span></div></div></div>
+<div class="profile-card" onclick="location.href='detail.html'"><img src="images/journal.jpg" class="profile-card-img" alt=""><div class="profile-card-body"><div class="profile-card-title">手账第三年：从精致到只写一句话，与自己和解</div><div class="profile-card-meta"><span>❤️ 1.5万</span><span>💬 198</span></div></div></div>
+<div class="profile-card" onclick="location.href='detail.html'"><img src="images/candle.jpg" class="profile-card-img" alt=""><div class="profile-card-body"><div class="profile-card-title">只留三件物品的浴室：极简护肤让我多出20分钟</div><div class="profile-card-meta"><span>❤️ 9800</span><span>💬 132</span></div></div></div>
+<div class="profile-card" onclick="location.href='detail.html'"><img src="images/coffee.jpg" class="profile-card-img" alt=""><div class="profile-card-body"><div class="profile-card-title">早起280天后，我的人生发生了怎样的变化</div><div class="profile-card-meta"><span>❤️ 8600</span><span>💬 98</span></div></div></div>
+<div class="profile-card" onclick="location.href='detail.html'"><img src="images/tea.jpg" class="profile-card-img" alt=""><div class="profile-card-body"><div class="profile-card-title">周末一人食：简单烹饪清淡饮食，给肠胃放个假</div><div class="profile-card-meta"><span>❤️ 7600</span><span>💬 87</span></div></div></div>
+</div>
+<div class="profile-grid hidden" id="likes-grid">
+<div class="profile-empty"><div class="profile-empty-icon">❤️</div><h3>还没有收藏</h3><p>收藏你喜欢的极简分享，发现更多灵感</p></div>
+</div>
+<div class="profile-grid hidden" id="following-grid">
+<div class="profile-empty"><div class="profile-empty-icon">👥</div><h3>正在关注</h3><p>关注更多极简生活者，获取每日灵感</p></div>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer"><div class="container"><div class="footer-bottom" style="border:none;padding:0"><span>© 2026 SimpleIsle · 少即是多</span><span style="font-size:0.72rem;color:var(--warm-gray)">源码来自小红书「代号大学生」，仅供参考学习交流使用</span></div></div></footer>
+<script>
+function switchTab(el,tab){
+  document.querySelectorAll(".profile-tab").forEach(function(t){t.classList.remove("active")});
+  el.classList.add("active");
+  document.getElementById("posts-grid").classList.add("hidden");
+  document.getElementById("likes-grid").classList.add("hidden");
+  document.getElementById("following-grid").classList.add("hidden");
+  document.getElementById(tab+"-grid").classList.remove("hidden");
+}
+</script>
+</body>
+</html>

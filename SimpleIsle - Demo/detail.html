@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详情 - SimpleIsle</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+body{background:var(--cream)}.page-wrap{padding-top:64px}
+.detail-layout{max-width:1100px;margin:0 auto;padding:40px 24px;display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start}
+.detail-main{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-md)}
+.detail-main img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.detail-thumb{display:flex;gap:8px;margin-top:12px}
+.detail-thumb img{width:72px;height:72px;border-radius:10px;object-fit:cover;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.detail-thumb img:hover,.detail-thumb img.active{border-color:var(--sage);transform:scale(1.05)}
+.detail-card{background:white;border-radius:20px;padding:24px;box-shadow:var(--shadow-xs);position:sticky;top:80px}
+.detail-user{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.detail-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--cream-dark)}
+.detail-name{font-weight:700;font-size:.95rem}
+.detail-bio{font-size:.75rem;color:var(--warm-gray);margin-top:2px}
+.detail-follow{margin-left:auto;padding:8px 18px;background:var(--charcoal);color:var(--cream);border:none;border-radius:999px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:var(--font-sans);transition:background .2s}
+.detail-follow:hover{background:var(--sage)}
+.detail-title{font-family:var(--font-serif);font-size:1.4rem;font-weight:600;line-height:1.3;margin-bottom:12px}
+.detail-desc{font-size:.9rem;color:var(--warm-gray);line-height:1.8;margin-bottom:20px;font-weight:300}
+.detail-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.detail-meta{display:flex;gap:12px;margin-bottom:20px}
+.detail-meta-item{display:flex;align-items:center;gap:6px;padding:8px 14px;background:var(--cream-dark);border-radius:999px;font-size:.8rem;font-weight:500;color:var(--charcoal-light)}
+.detail-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.detail-action{width:100%;padding:10px;border:1.5px solid var(--warm-gray-light);border-radius:10px;background:white;cursor:pointer;font-size:.8rem;font-weight:600;transition:all .2s;font-family:var(--font-sans);color:var(--charcoal);display:block;text-align:center}
+.detail-action:hover{border-color:var(--sage);color:var(--sage)}
+.detail-action.liked{border-color:var(--terracotta);color:var(--terracotta);background:rgba(193,127,89,.08)}
+.detail-similar{margin-top:32px}
+.detail-similar h3{font-family:var(--font-serif);font-size:1.1rem;font-weight:600;margin-bottom:16px}
+.detail-similar-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sim-card{border-radius:10px;overflow:hidden;cursor:pointer;transition:all .2s;display:block}
+.sim-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.sim-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.sim-title{padding:8px;font-size:.75rem;font-weight:600;background:white}
+@media(max-width:768px){.detail-layout{grid-template-columns:1fr}.detail-card{position:static}}
+</style>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-logo"><div class="logo-icon">岛</div>SimpleIsle</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="explore.html">探索</a></li><li><a href="principles.html">原则</a></li><li><a href="collection.html">收藏</a></li><li><a href="about.html">关于</a></li></ul><div class="nav-actions"><a href="post.html" class="btn btn-primary btn-sm">发布</a><a href="login.html"><img src="images/avatar1.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--warm-gray-light)"></a></div></div></nav>
+<div class="page-wrap">
+<div class="detail-layout">
+<div>
+<div class="detail-main"><img src="images/room1.jpg" id="mainImg"></div>
+<div class="detail-thumb">
+<img src="images/room1.jpg" class="active" onclick="changeImg(this)">
+<img src="images/plant1.jpg" onclick="changeImg(this)">
+<img src="images/journal.jpg" onclick="changeImg(this)">
+</div>
+<div class="detail-similar">
+<h3>相关推荐</h3>
+<div class="detail-similar-grid">
+<div class="sim-card" onclick="location.href='detail.html'"><img src="images/plant1.jpg"><div class="sim-title">绿植点缀小空间</div></div>
+<div class="sim-card" onclick="location.href='detail.html'"><img src="images/journal.jpg"><div class="sim-title">手账极简排版参考</div></div>
+<div class="sim-card" onclick="location.href='detail.html'"><img src="images/candle.jpg"><div class="sim-title">冬日温暖角落布置</div></div>
+<div class="sim-card" onclick="location.href='detail.html'"><img src="images/tea.jpg"><div class="sim-title">简单的一人食早餐</div></div>
+</div>
+</div>
+</div>
+<div class="detail-card">
+<div class="detail-user">
+<img src="images/avatar1.jpg" class="detail-avatar">
+<div>
+<div class="detail-name">林小简</div>
+<div class="detail-bio">极简生活者 · 断舍离实践者</div>
+</div>
+<button class="detail-follow" onclick="this.textContent=this.textContent==='关注'?'已关注':'关注';this.style.background=this.textContent==='已关注'?'var(--cream-dark)':'var(--charcoal)';this.style.color=this.textContent==='已关注'?'var(--charcoal)':'var(--cream)'">关注</button>
+</div>
+<h1 class="detail-title">断舍离三个月后，我家空无一物，却感到前所未有的丰盈</h1>
+<p class="detail-desc">三个月前，我决定开始彻底的断舍离。把衣柜从200件衣服减少到30件，把书架从堆满的书变成只保留真正会重读的10本，把客厅的杂物全部清空。刚开始的几天非常不习惯，甚至有些空虚。但慢慢地，我发现空无一物的空间反而给了我前所未有的自由感。少即是多，这句话我终于真正理解了。</p>
+<div class="detail-tags">
+<span class="tag tag-sage">🌱 物质极简</span>
+<span class="tag tag-warm">#断舍离</span>
+<span class="tag tag-cream">#我的小房间</span>
+</div>
+<div class="detail-meta">
+<span class="detail-meta-item">📍 上海</span>
+<span class="detail-meta-item">📅 2026.03.28</span>
+</div>
+<div class="detail-actions">
+<button class="detail-action liked" id="likeBtn" onclick="toggleLike()">❤️ 2.1万</button>
+<button class="detail-action">💬 386</button>
+<button class="detail-action" onclick="this.textContent=this.textContent==='收藏'?'✓已收藏':'收藏'">收藏</button>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer"><div class="container"><div class="footer-bottom" style="border:none;padding:0"><span>© 2026 SimpleIsle · 少即是多</span><span style="font-size:0.72rem;color:var(--warm-gray)">源码来自小红书「代号大学生」，仅供参考学习交流使用</span></div></div></footer>
+<script>
+function changeImg(el){
+  document.getElementById('mainImg').src=el.src;
+  document.querySelectorAll('.detail-thumb img').forEach(function(i){i.classList.remove('active')});
+  el.classList.add('active');
+}
+function toggleLike(){
+  var b=document.getElementById('likeBtn');
+  if(b.classList.contains('liked')){
+    b.classList.remove('liked');
+    b.innerHTML='🤍 2.1万';
+  } else {
+    b.classList.add('liked');
+    b.innerHTML='❤️ 2.1万';
+  }
+}
+</script>
+</body>
+</html>

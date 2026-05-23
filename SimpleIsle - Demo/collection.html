@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>灵感收藏 · SimpleIsle</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+body{background:var(--cream)}.page-wrap{padding-top:64px}
+.page-hero{background:var(--cream-dark);padding:80px 0 60px;text-align:center}
+.page-hero h1{font-family:var(--font-serif);font-size:2.2rem;font-weight:300;color:var(--charcoal);margin-bottom:8px}
+.page-hero p{font-size:.92rem;color:var(--warm-gray);font-weight:300}
+.inspo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.inspo-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xs);transition:all .25s ease;cursor:pointer;position:relative}
+.inspo-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.inspo-card:hover .inspo-img{transform:scale(1.05)}
+.inspo-img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .4s ease;display:block}
+.inspo-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(to top,rgba(58,54,50,.7),transparent);opacity:0;transition:opacity .25s ease}
+.inspo-card:hover .inspo-overlay{opacity:1}
+.inspo-tag{display:inline-block;padding:3px 8px;background:rgba(250,247,242,.9);border-radius:var(--radius-full);font-size:.7rem;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+.inspo-title{font-size:.82rem;font-weight:500;color:white;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bookmark-btn{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(250,247,242,.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;opacity:0}
+.inspo-card:hover .bookmark-btn{opacity:1}
+.bookmark-btn:hover{background:var(--cream);transform:scale(1.1)}
+@media(max-width:1024px){.inspo-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.inspo-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-icon">岛</div>SimpleIsle</a>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="explore.html">探索</a></li>
+      <li><a href="principles.html">原则</a></li>
+      <li><a href="collection.html" class="active">收藏</a></li>
+      <li><a href="about.html">关于</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="post.html" class="btn btn-primary btn-sm">发布</a>
+      <a href="login.html"><img src="images/avatar1.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--warm-gray-light)"></a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="container">
+      <h1>灵感收藏夹</h1>
+      <p>收集极简生活的美好瞬间，随时取用</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding:40px 0 80px">
+    <div class="section-header" style="margin-bottom:24px">
+      <div class="section-label">Inspiration</div>
+      <h2 class="section-title">分类灵感墙</h2>
+      <p class="section-subtitle">点击收藏按钮，随心收藏灵感</p>
+    </div>
+    <div class="inspo-grid">
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/room1.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🧘 心灵</div>
+          <div class="inspo-title">极简卧室设计灵感</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/plant1.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🌱 物质</div>
+          <div class="inspo-title">绿植点缀小空间</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/coffee.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">☕ 日常</div>
+          <div class="inspo-title">早起的仪式感</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/tea.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🍵 饮食</div>
+          <div class="inspo-title">简单的一人食早餐</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/journal.jpg" class="inspo-img" alt="" style="aspect-ratio:3/4">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">📓 生活</div>
+          <div class="inspo-title">手账极简排版参考</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/book1.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">📚 阅读</div>
+          <div class="inspo-title">极简书架陈列灵感</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/candle.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🕯️ 氛围</div>
+          <div class="inspo-title">冬日温暖角落布置</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/desk.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🖥️ 工作</div>
+          <div class="inspo-title">极简桌面工作流</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/nature1.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🌿 自然</div>
+          <div class="inspo-title">户外徒步装备清单</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/white1.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🎨 设计</div>
+          <div class="inspo-title">白色系室内设计</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/textile.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🧵 生活</div>
+          <div class="inspo-title">天然材质的温柔</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+      <div class="inspo-card" onclick="location.href='detail.html'">
+        <img src="images/room2.jpg" class="inspo-img" alt="">
+        <div class="inspo-overlay">
+          <div class="inspo-tag">🏠 家居</div>
+          <div class="inspo-title">日式侘寂风参考</div>
+        </div>
+        <button class="bookmark-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🔖'?'✓已收藏':'🔖'">🔖</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:none;padding:0">
+      <span>© 2026 SimpleIsle · 少即是多</span>
+      <span>源码来自小红书「代号大学生」，仅供参考学习交流使用</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

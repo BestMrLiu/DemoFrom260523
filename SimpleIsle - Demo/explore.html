@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>探索 · SimpleIsle</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+  body{background:var(--cream)}.page-wrap{padding-top:64px}
+  .page-hero{background:var(--cream-dark);padding:80px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .page-hero h1{font-family:var(--font-serif);font-size:2.2rem;font-weight:300;color:var(--charcoal);margin-bottom:8px}
+  .page-hero p{font-size:.92rem;color:var(--warm-gray);font-weight:300}
+  .page-hero::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;border:1px solid rgba(196,164,132,.15);top:-150px;left:-100px;pointer-events:none}
+  .filter-bar{background:var(--white);border-radius:var(--radius-lg);padding:14px 20px;display:flex;gap:8px;flex-wrap:wrap;box-shadow:var(--shadow-xs);margin:24px 0}
+  .filter-label{font-size:.8rem;font-weight:600;color:var(--warm-gray);white-space:nowrap;padding-top:4px}
+  .filter-chip{padding:6px 16px;border-radius:var(--radius-full);font-size:.82rem;font-weight:500;cursor:pointer;border:1.5px solid var(--warm-gray-light);background:transparent;color:var(--charcoal-light);transition:all .2s;font-family:var(--font-sans)}
+  .filter-chip:hover,.filter-chip.active{background:var(--charcoal);color:var(--cream);border-color:var(--charcoal)}
+  .feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .feed-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xs);transition:all .25s ease;cursor:pointer}
+  .feed-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+  .feed-card:hover .feed-img{transform:scale(1.04)}
+  .feed-img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .4s ease}
+  .feed-body{padding:14px}
+  .feed-tags{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .feed-title{font-size:.9rem;font-weight:500;color:var(--charcoal);line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .feed-user{display:flex;align-items:center;gap:8px}
+  .feed-avatar{width:24px;height:24px;border-radius:50%;object-fit:cover}
+  .feed-name{font-size:.78rem;font-weight:600;color:var(--charcoal-light)}
+  .feed-stats{font-size:.72rem;color:var(--warm-gray);margin-left:auto}
+  @media(max-width:1024px){.feed-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:600px){.feed-grid{grid-template-columns:1fr} }
+</style>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-icon">岛</div>SimpleIsle</a>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="explore.html" class="active">探索</a></li>
+      <li><a href="principles.html">原则</a></li>
+      <li><a href="collection.html">收藏</a></li>
+      <li><a href="about.html">关于</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="post.html" class="btn btn-primary btn-sm">发布</a>
+      <a href="login.html"><img src="images/avatar1.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--warm-gray-light)"></a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="container">
+      <h1>探索极简生活</h1>
+      <p>发现简单生活的无限可能</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="filter-bar">
+      <span class="filter-label">分类：</span>
+      <button class="filter-chip active">全部</button>
+      <button class="filter-chip">🌱 物质极简</button>
+      <button class="filter-chip">🧘 心灵减负</button>
+      <button class="filter-chip">🍃 生活留白</button>
+      <button class="filter-chip">☕ 早睡早起</button>
+      <button class="filter-chip">📓 手账日记</button>
+      <button class="filter-chip">🍵 简单饮食</button>
+      <button class="filter-chip">🖥️ 数字极简</button>
+    </div>
+
+    <div class="feed-grid">
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/room1.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-sage">🌱 物质极简</span>
+            <span class="tag tag-warm">#我的小房间</span>
+          </div>
+          <div class="feed-title">断舍离三个月后，我家空无一物，却感到前所未有的丰盈</div>
+          <div class="feed-user">
+            <img src="images/avatar1.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">林小简</span>
+            <span class="feed-stats">❤️ 2.1万</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/plant1.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-clay">🧘 心灵减负</span>
+            <span class="tag tag-warm">#慢生活</span>
+          </div>
+          <div class="feed-title">出租屋改造｜花了500块，把小房间变成了精神角落</div>
+          <div class="feed-user">
+            <img src="images/avatar2.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">苔原</span>
+            <span class="feed-stats">❤️ 1.8万</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/journal.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-cream">📓 生活留白</span>
+            <span class="tag tag-warm">#手账</span>
+          </div>
+          <div class="feed-title">手账第三年：从追求精致到只写一句话，我与自己和解了</div>
+          <div class="feed-user">
+            <img src="images/avatar3.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">阿泽</span>
+            <span class="feed-stats">❤️ 1.5万</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/coffee.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-clay">☕ 早睡早起</span>
+            <span class="tag tag-warm">#日常</span>
+          </div>
+          <div class="feed-title">早起280天后，我的人生发生了怎样的变化</div>
+          <div class="feed-user">
+            <img src="images/avatar4.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">苏木</span>
+            <span class="feed-stats">❤️ 1.3万</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/tea.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-sage">🍵 简单饮食</span>
+            <span class="tag tag-warm">#一人食</span>
+          </div>
+          <div class="feed-title">周末一人食：简单烹饪清淡饮食，给肠胃放个假</div>
+          <div class="feed-user">
+            <img src="images/avatar1.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">南风</span>
+            <span class="feed-stats">❤️ 1.1万</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/nature1.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-cream">🍃 生活留白</span>
+            <span class="tag tag-warm">#慢生活</span>
+          </div>
+          <div class="feed-title">一个人在山里走了三天，手机信号都没有，这才是真正的生活</div>
+          <div class="feed-user">
+            <img src="images/avatar2.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">溪远</span>
+            <span class="feed-stats">❤️ 9800</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/book1.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-sage">🧘 心灵减负</span>
+            <span class="tag tag-warm">#读书</span>
+          </div>
+          <div class="feed-title">极简阅读：我用一年读完52本书，找到了内心的平静</div>
+          <div class="feed-user">
+            <img src="images/avatar3.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">阿泽</span>
+            <span class="feed-stats">❤️ 7600</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/candle.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-cream">🌱 物质极简</span>
+            <span class="tag tag-warm">#香薰</span>
+          </div>
+          <div class="feed-title">只留三件物品的浴室：极简护肤让我的早晨多出20分钟</div>
+          <div class="feed-user">
+            <img src="images/avatar4.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">苏木</span>
+            <span class="feed-stats">❤️ 6200</span>
+          </div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <img src="images/desk.jpg" class="feed-img" alt="">
+        <div class="feed-body">
+          <div class="feed-tags">
+            <span class="tag tag-clay">🖥️ 数字极简</span>
+            <span class="tag tag-warm">#桌面</span>
+          </div>
+          <div class="feed-title">数字极简：我的数字生活从删掉47个App开始</div>
+          <div class="feed-user">
+            <img src="images/avatar1.jpg" class="feed-avatar" alt="">
+            <span class="feed-name">林小简</span>
+            <span class="feed-stats">❤️ 5400</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:none;padding:0">
+      <span>© 2026 SimpleIsle · 少即是多</span>
+      <span style="font-size:0.72rem;color:var(--warm-gray)">源码来自小红书「代号大学生」，仅供参考学习交流使用</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// 分类筛选功能
+var filterChips = document.querySelectorAll('.filter-chip');
+var feedCards = document.querySelectorAll('.feed-card');
+
+filterChips.forEach(function(chip) {
+  chip.addEventListener('click', function() {
+    // 更新选中状态
+    filterChips.forEach(function(c) { c.classList.remove('active'); });
+    this.classList.add('active');
+    
+    var filterText = this.textContent.trim();
+    
+    // 筛选卡片
+    feedCards.forEach(function(card) {
+      if (filterText === '全部') {
+        card.style.display = '';
+      } else {
+        var tags = card.querySelector('.feed-tags');
+        if (tags && tags.textContent.includes(filterText)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

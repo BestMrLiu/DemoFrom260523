@@ -1,0 +1,877 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SimpleIsle · 极简岛 | 反内卷 · 低欲望生活</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--cream-dark);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6) saturate(0.7);
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(58, 54, 50, 0.55) 0%,
+      rgba(92, 86, 80, 0.35) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    padding: 120px var(--space-md) 80px;
+  }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 28px;
+    letter-spacing: 0.05em;
+    animation: fadeUp 0.6s var(--ease-out) forwards;
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: 3.4rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s var(--ease-out) both;
+  }
+
+  .hero-title strong {
+    font-weight: 700;
+    color: var(--clay-light);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.9;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s var(--ease-out) both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.3s var(--ease-out) both;
+  }
+
+  .btn-hero {
+    padding: 13px 30px;
+    border-radius: var(--radius-full);
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease);
+    font-family: var(--font-sans);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .btn-hero-primary {
+    background: rgba(250, 247, 242, 0.92);
+    color: var(--charcoal);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-hero-primary:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-hero-ghost {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-hero-ghost:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Hero Quote */
+  .hero-quote {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+    animation: fadeUp 0.6s 0.4s var(--ease-out) both;
+  }
+
+  /* Stats */
+  .stats-bar {
+    background: var(--white);
+    padding: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .stats-inner {
+    display: flex;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .stat-item {
+    flex: 1;
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid var(--cream-dark);
+  }
+
+  .stat-item:last-child {
+    border-right: none;
+  }
+
+  .stat-num {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+
+  .stat-num span {
+    color: var(--sage);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Philosophy */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .philosophy-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: var(--shadow-xs);
+    transition: all var(--duration-base) var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .philosophy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--sage);
+    transform: scaleX(0);
+    transition: transform var(--duration-base) var(--ease);
+  }
+
+  .philosophy-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .philosophy-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .philosophy-icon {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+
+  .philosophy-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--charcoal);
+  }
+
+  .philosophy-desc {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* Quote Banner */
+  .quote-banner {
+    background: var(--charcoal);
+    padding: var(--space-2xl) 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-banner::before,
+  .quote-banner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(250, 247, 242, 0.08);
+  }
+
+  .quote-banner::before {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    left: -60px;
+  }
+
+  .quote-banner::after {
+    width: 200px;
+    height: 200px;
+    bottom: -60px;
+    right: -40px;
+  }
+
+  .quote-text {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 300;
+    color: rgba(250, 247, 242, 0.9);
+    line-height: 1.5;
+    max-width: 700px;
+    margin: 0 auto 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .quote-text::before {
+    content: '"';
+    font-size: 4rem;
+    color: var(--sage);
+    opacity: 0.5;
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    font-family: var(--font-serif);
+  }
+
+  .quote-author {
+    font-size: 0.85rem;
+    color: rgba(250, 247, 242, 0.4);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Content Feed */
+  .feed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .feed-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xs);
+    transition: all var(--duration-base) var(--ease);
+    cursor: pointer;
+  }
+
+  .feed-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .feed-card:hover .feed-img {
+    transform: scale(1.04);
+  }
+
+  .feed-img-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .feed-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--ease);
+  }
+
+  .feed-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  .feed-body {
+    padding: var(--space-sm);
+  }
+
+  .feed-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .feed-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .feed-username {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  .feed-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    line-height: 1.5;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .feed-meta {
+    display: flex;
+    gap: 14px;
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+  }
+
+  /* Topics */
+  .topics-scroll {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
+    scrollbar-width: none;
+  }
+
+  .topics-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topic-chip {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    background: var(--white);
+    border: 1.5px solid var(--warm-gray-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--charcoal-light);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease);
+    font-family: var(--font-sans);
+    white-space: nowrap;
+  }
+
+  .topic-chip:hover,
+  .topic-chip.active {
+    background: var(--charcoal);
+    color: var(--cream);
+    border-color: var(--charcoal);
+  }
+
+  /* Creators */
+  .creators-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+  }
+
+  .creator-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow-xs);
+    transition: all var(--duration-base) var(--ease);
+    cursor: pointer;
+  }
+
+  .creator-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .creator-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 14px;
+    border: 3px solid var(--cream-dark);
+  }
+
+  .creator-name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+  }
+
+  .creator-tag {
+    font-size: 0.75rem;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .creator-count {
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--cream-dark);
+    padding: var(--space-3xl) 0;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .cta-title {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+  }
+
+  .cta-title strong {
+    font-weight: 700;
+    color: var(--sage-dark);
+  }
+
+  .cta-desc {
+    font-size: 0.95rem;
+    color: var(--warm-gray);
+    margin-bottom: var(--space-lg);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-title { font-size: 2.6rem; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .feed-grid { grid-template-columns: repeat(2, 1fr); }
+    .creators-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-title { font-size: 2rem; }
+    .hero-desc { font-size: 0.92rem; }
+    .feed-grid { grid-template-columns: 1fr; }
+    .creators-row { grid-template-columns: repeat(2, 1fr); }
+    .stats-inner { flex-wrap: wrap; }
+    .stat-item { flex: 1 1 50%; border-right: none; border-bottom: 1px solid var(--cream-dark); }
+    .stat-item:last-child { border-bottom: none; }
+    .quote-text { font-size: 1.4rem; }
+  }
+</style>
+<body>
+
+<!-- Nav -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">岛</div>
+      SimpleIsle
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">首页</a></li>
+      <li><a href="explore.html">探索</a></li>
+      <li><a href="principles.html">原则</a></li>
+      <li><a href="collection.html">收藏</a></li>
+      <li><a href="about.html">关于</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="post.html" class="btn btn-primary btn-sm">发布</a>
+      <a href="login.html">
+        <img src="images/avatar1.jpg" alt="" class="nav-avatar" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--warm-gray-light);transition:all 0.2s">
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="images/hero.jpg" alt="">
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-label">🌿 2026 反内卷生活方式</div>
+      <h1 class="hero-title">
+        在简单中<br>发现<strong>生活的质感</strong>
+      </h1>
+      <p class="hero-desc">
+        SimpleIsle 极简岛，陪你探索低欲望生活的美好。<br>
+        拒绝焦虑，回归本真，让每一天都轻盈而有意义。
+      </p>
+      <div class="hero-actions">
+        <a href="login.html" class="btn-hero btn-hero-primary">开始探索 →</a>
+        <a href="principles.html" class="btn-hero btn-hero-ghost">了解更多</a>
+      </div>
+      <div class="hero-quote">"生活的艺术，在于懂得删繁就简。"</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">12<span>万+</span></div>
+      <div class="stat-label">极简生活者</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">48<span>万+</span></div>
+      <div class="stat-label">生活分享</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">68<span>+</span></div>
+      <div class="stat-label">覆盖城市</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">8.6<span>万</span></div>
+      <div class="stat-label">今日打卡</div>
+    </div>
+  </div>
+</div>
+
+<!-- Philosophy -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Our Philosophy</div>
+        <h2 class="section-title">极简生活的三个原则</h2>
+        <p class="section-subtitle">简单不是匮乏，而是一种选择</p>
+      </div>
+    </div>
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <div class="philosophy-icon">🌱</div>
+        <div class="philosophy-title">物质极简</div>
+        <div class="philosophy-desc">减少物品，珍惜当下。每一个物件都应当是有意义、有功能的存在。扔掉不需要的，留下真正重要的。</div>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-icon">🧘</div>
+        <div class="philosophy-title">心灵减负</div>
+        <div class="philosophy-desc">放下焦虑，停止内耗。接受不完美，给生活留白，让心灵有呼吸的空间，才能发现真正重要的事。</div>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-icon">🍃</div>
+        <div class="philosophy-title">生活留白</div>
+        <div class="philosophy-desc">给自己留出无所事事的时间。不必每一分钟都填满，偶尔发呆、散步、什么都不做，也是一种美好。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote Banner -->
+<div class="quote-banner">
+  <div class="container-sm">
+    <div class="quote-text">拥有得越少，得到的越多。<br>当你不再被物品束缚，才能真正感受生活的美好。</div>
+    <div class="quote-author">—— SimpleIsle 极简宣言</div>
+  </div>
+</div>
+
+<!-- Topics -->
+<section class="section-sm">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Topics</div>
+        <h2 class="section-title">热门话题</h2>
+      </div>
+    </div>
+    <div class="topics-scroll">
+      <div class="topic-chip active">#反内卷生活</div>
+      <div class="topic-chip">#低欲望日常</div>
+      <div class="topic-chip">#极简穿搭</div>
+      <div class="topic-chip">#我的小房间</div>
+      <div class="topic-chip">#断舍离日记</div>
+      <div class="topic-chip">#早睡早起打卡</div>
+      <div class="topic-chip">#数字极简</div>
+      <div class="topic-chip">#慢生活</div>
+      <div class="topic-chip">#极简护肤</div>
+      <div class="topic-chip">#一人食</div>
+      <div class="topic-chip">#冥想日常</div>
+      <div class="topic-chip">#手账生活</div>
+    </div>
+  </div>
+</section>
+
+<!-- Feed -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Feed</div>
+        <h2 class="section-title">近期精选</h2>
+        <p class="section-subtitle">来自极简生活者们的真实分享</p>
+      </div>
+    </div>
+    <div class="feed-grid">
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <div class="feed-img-wrap">
+          <img src="images/room1.jpg" class="feed-img" alt="">
+          <div class="feed-badge">🧘 心灵减负</div>
+        </div>
+        <div class="feed-body">
+          <div class="feed-user">
+            <img src="images/avatar1.jpg" class="feed-avatar" alt="">
+            <span class="feed-username">林小简</span>
+          </div>
+          <div class="feed-title">断舍离三个月后，我家空无一物，却感到前所未有的丰盈</div>
+          <div class="feed-meta"><span>❤️ 2.1万</span><span>💬 386</span><span>📍 上海</span></div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <div class="feed-img-wrap">
+          <img src="images/plant1.jpg" class="feed-img" alt="">
+          <div class="feed-badge">🌱 物质极简</div>
+        </div>
+        <div class="feed-body">
+          <div class="feed-user">
+            <img src="images/avatar2.jpg" class="feed-avatar" alt="">
+            <span class="feed-username">苔原</span>
+          </div>
+          <div class="feed-title">出租屋改造｜花了500块，把6平米的房间变成了我的精神角落</div>
+          <div class="feed-meta"><span>❤️ 1.8万</span><span>💬 256</span><span>📍 北京</span></div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <div class="feed-img-wrap">
+          <img src="images/journal.jpg" class="feed-img" alt="">
+          <div class="feed-badge">📓 生活留白</div>
+        </div>
+        <div class="feed-body">
+          <div class="feed-user">
+            <img src="images/avatar3.jpg" class="feed-avatar" alt="">
+            <span class="feed-username">阿泽</span>
+          </div>
+          <div class="feed-title">手账第三年：从追求精致排版到只写一句话，我与自己和解了</div>
+          <div class="feed-meta"><span>❤️ 1.5万</span><span>💬 198</span><span>📍 成都</span></div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <div class="feed-img-wrap">
+          <img src="images/coffee.jpg" class="feed-img" alt="">
+          <div class="feed-badge">☕ 早睡早起</div>
+        </div>
+        <div class="feed-body">
+          <div class="feed-user">
+            <img src="images/avatar4.jpg" class="feed-avatar" alt="">
+            <span class="feed-username">苏木</span>
+          </div>
+          <div class="feed-title">早起280天后，我的人生发生了怎样的变化</div>
+          <div class="feed-meta"><span>❤️ 1.3万</span><span>💬 165</span><span>📍 杭州</span></div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <div class="feed-img-wrap">
+          <img src="images/tea.jpg" class="feed-img" alt="">
+          <div class="feed-badge">🍵 一人食</div>
+        </div>
+        <div class="feed-body">
+          <div class="feed-user">
+            <img src="images/avatar1.jpg" class="feed-avatar" alt="">
+            <span class="feed-username">南风</span>
+          </div>
+          <div class="feed-title">周末一人食：简单烹饪，清淡饮食，给肠胃放个假</div>
+          <div class="feed-meta"><span>❤️ 1.1万</span><span>💬 143</span><span>📍 深圳</span></div>
+        </div>
+      </div>
+      <div class="feed-card" onclick="location.href='detail.html'">
+        <div class="feed-img-wrap">
+          <img src="images/nature1.jpg" class="feed-img" alt="">
+          <div class="feed-badge">🌿 慢生活</div>
+        </div>
+        <div class="feed-body">
+          <div class="feed-user">
+            <img src="images/avatar2.jpg" class="feed-avatar" alt="">
+            <span class="feed-username">溪远</span>
+          </div>
+          <div class="feed-title">一个人在山里走了三天，手机信号都没有，这才是真正的生活</div>
+          <div class="feed-meta"><span>❤️ 9800</span><span>💬 124</span><span>📍 云南</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Creators -->
+<section class="section-sm">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">People</div>
+        <h2 class="section-title">极简生活达人</h2>
+        <p class="section-subtitle">学习她们如何践行简单生活</p>
+      </div>
+    </div>
+    <div class="creators-row">
+      <div class="creator-card" onclick="location.href='profile.html'">
+        <img src="images/avatar1.jpg" class="creator-avatar" alt="">
+        <div class="creator-name">林小简</div>
+        <div class="creator-tag">🌱 物质极简</div>
+        <div class="creator-count">❤️ 28.6万 · 48篇</div>
+      </div>
+      <div class="creator-card" onclick="location.href='profile.html'">
+        <img src="images/avatar2.jpg" class="creator-avatar" alt="">
+        <div class="creator-name">苔原</div>
+        <div class="creator-tag">🧘 心灵减负</div>
+        <div class="creator-count">❤️ 21.3万 · 36篇</div>
+      </div>
+      <div class="creator-card" onclick="location.href='profile.html'">
+        <img src="images/avatar3.jpg" class="creator-avatar" alt="">
+        <div class="creator-name">阿泽</div>
+        <div class="creator-tag">📓 生活留白</div>
+        <div class="creator-count">❤️ 18.9万 · 52篇</div>
+      </div>
+      <div class="creator-card" onclick="location.href='profile.html'">
+        <img src="images/avatar4.jpg" class="creator-avatar" alt="">
+        <div class="creator-name">苏木</div>
+        <div class="creator-tag">☀️ 早睡早起</div>
+        <div class="creator-count">❤️ 15.7万 · 29篇</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label">Start Today</div>
+    <h2 class="cta-title">准备好开启你的<br><strong>极简生活</strong>了吗？</h2>
+    <p class="cta-desc">加入 12 万极简生活者，扔掉不需要的，找到真正重要的。让生活回到它本来该有的样子。</p>
+    <div class="cta-actions">
+      <a href="login.html" class="btn btn-primary btn-lg">立即加入</a>
+      <a href="principles.html" class="btn btn-outline btn-lg">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">🌿 SimpleIsle</div>
+        <p class="footer-desc">SimpleIsle 极简岛，一个专注于反内卷、低欲望生活的分享社区。在这里，我们相信少即是多，简单才是真正的丰盛。</p>
+      </div>
+      <div>
+        <div class="footer-title">探索</div>
+        <ul class="footer-links">
+          <li><a href="explore.html">精选内容</a></li>
+          <li><a href="principles.html">极简原则</a></li>
+          <li><a href="collection.html">灵感收藏</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">创作者</div>
+        <ul class="footer-links">
+          <li><a href="post.html">发布分享</a></li>
+          <li><a href="profile.html">我的主页</a></li>
+          <li><a href="login.html">登录注册</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">关于</div>
+        <ul class="footer-links">
+          <li><a href="about.html">关于我们</a></li>
+          <li><a href="#">用户协议</a></li>
+          <li><a href="#">隐私政策</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SimpleIsle 极简岛 · 少即是多</span>
+      <span style="font-size:0.72rem;color:var(--warm-gray)">源码来自小红书「代号大学生」，仅供参考学习交流使用</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

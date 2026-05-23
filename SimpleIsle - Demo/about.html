@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于我们 - SimpleIsle</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+body{background:var(--cream)}.page-wrap{padding-top:64px}
+.page-hero{background:var(--charcoal);padding:80px 0;text-align:center;color:white}
+.page-hero h1{font-family:var(--font-serif);font-size:2.4rem;font-weight:300;margin-bottom:8px}
+.page-hero p{font-size:.92rem;color:rgba(250,247,242,.6);font-weight:300}
+.about-intro{max-width:700px;margin:0 auto;padding:80px 0;text-align:center}
+.about-intro h2{font-family:var(--font-serif);font-size:1.8rem;font-weight:300;color:var(--charcoal);margin-bottom:16px;line-height:1.5}
+.about-intro p{font-size:.95rem;color:var(--warm-gray);line-height:1.9;font-weight:300}
+.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mission-card{background:white;border-radius:20px;padding:32px 24px;text-align:center;box-shadow:var(--shadow-xs);transition:all .25s ease}
+.mission-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.mission-icon{font-size:2.5rem;margin-bottom:16px}
+.mission-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:600;margin-bottom:10px}
+.mission-desc{font-size:.85rem;color:var(--warm-gray);line-height:1.7;font-weight:300}
+.timeline{position:relative;max-width:600px;margin:0 auto;padding-left:60px}
+.timeline::before{content:"";position:absolute;left:20px;top:0;bottom:0;width:1px;background:var(--warm-gray-light)}
+.timeline-item{display:flex;gap:24px;margin-bottom:40px;position:relative}
+.timeline-dot{width:42px;height:42px;border-radius:50%;background:white;border:2px solid var(--sage);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2;margin-left:-60px;font-size:1.1rem}
+.timeline-content{position:absolute;left:70px;top:8px}
+.timeline-date{font-size:.72rem;font-weight:600;color:var(--sage);margin-bottom:4px;letter-spacing:.05em}
+.timeline-title{font-weight:700;font-size:.95rem;margin-bottom:6px}
+.timeline-desc{font-size:.82rem;color:var(--warm-gray);line-height:1.7;font-weight:300}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.team-card{background:white;border-radius:20px;padding:28px 20px;text-align:center;box-shadow:var(--shadow-xs);transition:all .25s ease}
+.team-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.team-avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 14px;border:3px solid var(--cream-dark)}
+.team-name{font-family:var(--font-serif);font-weight:600;font-size:.95rem;margin-bottom:4px}
+.team-role{font-size:.75rem;color:var(--sage);margin-bottom:10px}
+.team-desc{font-size:.8rem;color:var(--warm-gray);line-height:1.6;font-weight:300}
+.about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:60px}
+.stat-card{background:white;border-radius:16px;padding:28px 16px;text-align:center;box-shadow:var(--shadow-xs)}
+.stat-n{font-family:var(--font-serif);font-size:1.8rem;font-weight:600;color:var(--charcoal)}
+.stat-l{font-size:.75rem;color:var(--warm-gray);margin-top:4px}
+.about-cta{background:var(--charcoal);padding:60px;border-radius:24px;text-align:center;color:white;margin-bottom:60px}
+.about-cta h2{font-family:var(--font-serif);font-size:2rem;font-weight:300;margin-bottom:12px}
+.about-cta p{opacity:.6;margin-bottom:28px;font-size:.95rem;font-weight:300}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+@media(max-width:1024px){.team-grid{grid-template-columns:repeat(2,1fr)}.about-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.mission-grid{grid-template-columns:1fr}.timeline{padding-left:0}.timeline::before{display:none}.timeline-dot{margin-left:0}.timeline-content{position:static;margin-top:8px}}
+</style>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-logo"><div class="logo-icon">岛</div>SimpleIsle</a><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="explore.html">探索</a></li><li><a href="principles.html">原则</a></li><li><a href="collection.html">收藏</a></li><li><a href="about.html" class="active">关于</a></li></ul><div class="nav-actions"><a href="post.html" class="btn btn-primary btn-sm">发布</a><a href="login.html"><img src="images/avatar1.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--warm-gray-light)"></a></div></div></nav>
+<div class="page-wrap">
+<div class="page-hero"><div class="container"><h1>关于我们</h1><p>SimpleIsle 极简岛，一个相信少即是多的社区</p></div></div>
+<div class="container">
+<div class="about-intro"><h2>我们相信，在这个充满焦虑的时代，<br>简单才是最好的答案</h2><p>SimpleIsle 诞生于一个简单的疑问：为什么我们拥有得越多，反而越不快乐？于是我们决定创建一个空间，让人们可以分享简单生活的美好，一起践行极简主义，找回内心的宁静。</p></div>
+<div class="about-stats">
+<div class="stat-card"><div class="stat-n">12<span style="color:var(--sage)">万+</span></div><div class="stat-l">极简生活者</div></div>
+<div class="stat-card"><div class="stat-n">48<span style="color:var(--sage)">万+</span></div><div class="stat-l">生活分享</div></div>
+<div class="stat-card"><div class="stat-n">68<span style="color:var(--sage)">+</span></div><div class="stat-l">覆盖城市</div></div>
+<div class="stat-card"><div class="stat-n">2026</div><div class="stat-l">产品上线</div></div>
+</div>
+<div class="section-header" style="margin-bottom:32px"><div class="section-label">Our Mission</div><h2 class="section-title">我们的使命</h2><p class="section-subtitle">让更多人体验简单生活的美好</p></div>
+<div class="mission-grid" style="margin-bottom:60px">
+<div class="mission-card"><div class="mission-icon">🌿</div><div class="mission-title">推广极简理念</div><div class="mission-desc">通过内容、工具和社区，帮助更多人理解并实践极简主义，让简单成为可能。</div></div>
+<div class="mission-card"><div class="mission-icon">🤝</div><div class="mission-title">构建温暖社区</div><div class="mission-desc">创造一个没有焦虑、充满善意的分享空间，让每个人都能找到共鸣和鼓励。</div></div>
+<div class="mission-card"><div class="mission-icon">📖</div><div class="mission-title">传播生活智慧</div><div class="mission-desc">分享真实的生活经验和见解，帮助大家找到适合自己的简单生活方式。</div></div>
+</div>
+<div class="section-header" style="margin-bottom:32px"><div class="section-label">Timeline</div><h2 class="section-title">发展历程</h2></div>
+<div class="timeline" style="margin-bottom:60px">
+<div class="timeline-item"><div class="timeline-dot">🌱</div><div class="timeline-content"><div class="timeline-date">2025 Q1</div><div class="timeline-title">SimpleIsle 1.0 上线</div><div class="timeline-desc">几位热爱简单生活的大学生创建了 SimpleIsle，最初只是一个极简主义分享博客。</div></div></div>
+<div class="timeline-item"><div class="timeline-dot">🌿</div><div class="timeline-content"><div class="timeline-date">2025 Q3</div><div class="timeline-title">用户突破 1 万</div><div class="timeline-desc">极简生活理念引发共鸣，社区用户快速增长，大家开始分享自己的断舍离经历。</div></div></div>
+<div class="timeline-item"><div class="timeline-dot">🏆</div><div class="timeline-content"><div class="timeline-date">2025 Q4</div><div class="timeline-title">获得社会创新奖</div><div class="timeline-desc">SimpleIsle 获得高校社会创新大赛金奖，团队正式成立。</div></div></div>
+<div class="timeline-item"><div class="timeline-dot">🌍</div><div class="timeline-content"><div class="timeline-date">2026 Q1</div><div class="timeline-title">覆盖 68 个城市</div><div class="timeline-desc">SimpleIsle 用户遍布全国，注册用户突破 12 万，成为极简生活领域的标杆社区。</div></div></div>
+</div>
+<div class="section-header" style="margin-bottom:32px"><div class="section-label">Team</div><h2 class="section-title">开发团队</h2><p class="section-subtitle">代号大学生</p></div>
+<div style="max-width:600px;margin:0 auto 60px;text-align:center">
+<div style="background:white;border-radius:24px;padding:48px 32px;box-shadow:var(--shadow-sm)">
+<div style="font-size:4rem;margin-bottom:20px">🎓</div>
+<h3 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:600;margin-bottom:12px">代号大学生</h3>
+<p style="font-size:.9rem;color:var(--warm-gray);line-height:1.8;margin-bottom:24px;font-weight:300">我们是一群热爱生活、追求简单的大学生。在一次 Web 课程作业中，我们决定用代码诠释「少即是多」的生活哲学。SimpleIsle 极简岛是我们对极简生活方式的理解与表达，希望这个小小的作品能给每一个被内卷裹挟的人带来一丝宁静。</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+<span style="padding:6px 14px;background:var(--cream-dark);border-radius:999px;font-size:.8rem;font-weight:500">🌿 极简主义</span>
+<span style="padding:6px 14px;background:var(--cream-dark);border-radius:999px;font-size:.8rem;font-weight:500">💻 Web开发</span>
+<span style="padding:6px 14px;background:var(--cream-dark);border-radius:999px;font-size:.8rem;font-weight:500">🎨 设计美学</span>
+</div>
+</div>
+</div>
+<div class="about-cta">
+<h2>准备好开启你的极简生活了吗？</h2>
+<p>加入 12 万极简生活者，一起践行少即是多的人生哲学</p>
+<div class="cta-row">
+<a href="login.html" class="btn btn-primary btn-lg">立即加入</a>
+<a href="principles.html" class="btn" style="background:rgba(250,247,242,.15);color:var(--cream);border:1.5px solid rgba(250,247,242,.3);padding:12px 28px;border-radius:999px;font-weight:500;font-family:var(--font-sans)">了解更多</a>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer"><div class="container"><div class="footer-bottom" style="border:none;padding:0"><span>© 2026 SimpleIsle · 少即是多</span><span style="font-size:0.72rem;color:var(--warm-gray)">源码来自小红书「代号大学生」，仅供参考学习交流使用</span></div></div></footer>
+</body>
+</html>

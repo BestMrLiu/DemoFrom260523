@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>发布分享 - SimpleIsle</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+body{background:var(--cream)}.page-wrap{padding-top:64px}
+.page-hero{background:var(--cream-dark);padding:60px 0;text-align:center}
+.page-hero h1{font-family:var(--font-serif);font-size:2rem;font-weight:300;color:var(--charcoal);margin-bottom:8px}
+.page-hero p{font-size:.92rem;color:var(--warm-gray);font-weight:300}
+.post-container{max-width:900px;margin:-24px auto 60px;padding:0 24px;display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.post-card{background:white;border-radius:24px;padding:32px;box-shadow:var(--shadow-sm)}
+.post-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:600;margin-bottom:24px;color:var(--charcoal)}
+.upload-area{border:2px dashed var(--warm-gray-light);border-radius:16px;padding:40px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:20px}
+.upload-area:hover{border-color:var(--sage);background:rgba(139,158,139,.04)}
+.upload-icon{font-size:2.5rem;margin-bottom:10px}
+.upload-text{font-size:.9rem;color:var(--warm-gray)}
+.upload-text strong{color:var(--sage)}
+.upload-hint{font-size:.75rem;color:var(--warm-gray-light);margin-top:6px}
+.preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.preview-count{font-size:.8rem;color:var(--warm-gray);text-align:center;margin-top:6px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:.8rem;font-weight:600;color:var(--charcoal);margin-bottom:8px}
+.form-input,.form-textarea,.form-select{width:100%;padding:11px 14px;border:1.5px solid var(--warm-gray-light);border-radius:12px;font-family:var(--font-sans);font-size:.9rem;color:var(--charcoal);background:white;transition:all .2s;outline:none}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(139,158,139,.12)}
+.form-textarea{resize:vertical;min-height:100px}
+.topic-tags{display:flex;flex-wrap:wrap;gap:8px}
+.topic-btn{padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:500;cursor:pointer;border:1.5px solid var(--warm-gray-light);background:white;transition:all .2s;font-family:var(--font-sans);color:var(--charcoal-light);display:inline-block}
+.topic-btn:hover{border-color:var(--sage);color:var(--sage)}
+.topic-btn.selected{border-color:var(--sage);color:var(--sage);background:rgba(139,158,139,.1)}
+.post-row{display:flex;gap:12px}
+.btn-post{flex:1;padding:13px;border-radius:999px;font-size:.95rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:var(--font-sans);display:block;text-align:center}
+.btn-publish{background:var(--charcoal);color:var(--cream)}
+.btn-publish:hover{background:var(--sage);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.btn-draft{background:var(--cream-dark);color:var(--charcoal-light)}
+.btn-draft:hover{background:var(--warm-gray-light)}
+.post-tips{background:white;border-radius:24px;padding:24px;box-shadow:var(--shadow-xs);position:sticky;top:80px}
+.post-tips h3{font-family:var(--font-serif);font-size:1rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tip-item{display:flex;gap:10px;margin-bottom:14px;padding:12px;background:var(--cream);border-radius:10px}
+.tip-icon{font-size:1.1rem;flex-shrink:0}
+.tip-text{font-size:.8rem;color:var(--warm-gray);line-height:1.6}
+.tip-text strong{color:var(--charcoal);display:block;margin-bottom:2px}
+@media(max-width:768px){.post-container{grid-template-columns:1fr}.post-tips{position:static}.form-row{grid-template-columns:1fr}}
+</style>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-icon">岛</div>SimpleIsle</a>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="explore.html">探索</a></li>
+      <li><a href="principles.html">原则</a></li>
+      <li><a href="collection.html">收藏</a></li>
+      <li><a href="about.html">关于</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="post.html" class="btn btn-primary btn-sm">发布</a>
+      <a href="login.html"><img src="images/avatar1.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--warm-gray-light)"></a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="container"><h1>发布极简生活</h1><p>分享你的简单生活，让更多人感受极简的美好</p></div>
+  </div>
+  <div class="post-container">
+    <div class="post-card">
+      <div class="post-title">发布内容</div>
+      <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">点击或拖拽上传图片<br><strong>支持 JPG/PNG，最大 10MB</strong></div>
+        <div class="upload-hint">最多上传 9 张图片</div>
+      </div>
+      <input type="file" id="fileInput" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+      <div class="preview-grid" id="previewGrid"></div>
+      <div class="preview-count" id="previewCount"></div>
+      <div class="form-group">
+        <label class="form-label">标题</label>
+        <input type="text" class="form-input" placeholder="给你的分享起个标题..." maxlength="60" id="postTitle">
+        <div style="text-align:right;font-size:.72rem;color:var(--warm-gray);margin-top:4px"><span id="titleCount">0</span>/60</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">📍 地点</label>
+          <input type="text" class="form-input" placeholder="例如：杭州" id="postLocation">
+        </div>
+        <div class="form-group">
+          <label class="form-label">🏷️ 分类</label>
+          <select class="form-input" id="postCategory">
+            <option value="">选择分类</option>
+            <option>🌱 物质极简</option><option>🧘 心灵减负</option><option>🍃 生活留白</option>
+            <option>☕ 早睡早起</option><option>📓 手账日记</option><option>🍵 简单饮食</option>
+            <option>🖥️ 数字极简</option><option>🌿 自然户外</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">正文内容</label>
+        <textarea class="form-textarea" placeholder="描述你的极简生活体验或心得..." id="postDesc"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">🏷️ 添加话题（可多选）</label>
+        <div class="topic-tags">
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#反内卷生活</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#低欲望日常</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#极简穿搭</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#我的小房间</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#断舍离日记</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#早睡早起打卡</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#数字极简</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#慢生活</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#极简护肤</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#一人食</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#冥想日常</button>
+          <button type="button" class="topic-btn" onclick="toggleTopic(this)">#手账生活</button>
+        </div>
+      </div>
+      <div class="post-row">
+        <button class="btn-post btn-draft" onclick="showMsg('已保存为草稿')">存草稿</button>
+        <button class="btn-post btn-publish" onclick="handlePublish()">发布分享</button>
+      </div>
+    </div>
+    <div class="post-tips">
+      <h3>💡 发布小贴士</h3>
+      <div class="tip-item"><div class="tip-icon">📷</div><div class="tip-text"><strong>图片建议</strong>上传 4:3 或 1:1 比例的高清图片，光线充足、色彩干净的照片更受欢迎</div></div>
+      <div class="tip-item"><div class="tip-icon">🏷️</div><div class="tip-text"><strong>话题标签</strong>添加准确的分类标签，让更多人发现你的内容</div></div>
+      <div class="tip-item"><div class="tip-icon">📍</div><div class="tip-text"><strong>地点标注</strong>标注打卡地点，方便其他用户按城市探索</div></div>
+      <div class="tip-item"><div class="tip-icon">💬</div><div class="tip-text"><strong>内容分享</strong>分享真实的极简体验，介绍你的方法和心得，更容易获得共鸣</div></div>
+      <div class="tip-item"><div class="tip-icon">⏰</div><div class="tip-text"><strong>最佳时间</strong>晚间 20:00-22:00 发布更容易获得互动</div></div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:none;padding:0">
+      <span>© 2026 SimpleIsle - 少即是多</span>
+      <span>源码来自小红书「代号大学生」，仅供参考学习交流使用</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var uploaded=[];
+function handleFiles(files){
+  var grid=document.getElementById('previewGrid');
+  for(var i=0;i<Math.min(files.length,9-uploaded.length);i++){
+    var f=files[i];
+    if(!f.type.startsWith('image/'))continue;
+    var r=new FileReader();
+    r.onload=function(e){
+      var d=document.createElement('div');
+      d.style.cssText='aspect-ratio:1;border-radius:10px;overflow:hidden';
+      d.innerHTML='<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover;display:block">';
+      grid.appendChild(d);
+      document.getElementById('previewCount').textContent='已上传 '+(++uploaded.length)+' 张';
+    };
+    r.readAsDataURL(f);
+  }
+}
+var ua=document.getElementById('uploadArea');
+ua.addEventListener('dragover',function(e){e.preventDefault();ua.classList.add('dragover')});
+ua.addEventListener('dragleave',function(){ua.classList.remove('dragover')});
+ua.addEventListener('drop',function(e){e.preventDefault();ua.classList.remove('dragover');handleFiles(e.dataTransfer.files)});
+document.getElementById('postTitle').addEventListener('input',function(){
+  document.getElementById('titleCount').textContent=this.value.length;
+});
+function toggleTopic(btn){btn.classList.toggle('selected')}
+function handlePublish(){
+  var t=document.getElementById('postTitle').value;
+  if(!t.trim()){showMsg('请输入标题');return;}
+  showMsg('发布成功！正在跳转...',function(){window.location.href='index.html'});
+}
+function showMsg(m,cb){
+  var el=document.createElement('div');
+  el.style.cssText='position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(20px);background:#3A3632;color:#FAF7F2;padding:12px 28px;border-radius:999px;font-family:var(--font-sans);font-size:.88rem;z-index:9999;transition:all .3s ease;white-space:nowrap';
+  el.textContent=m;
+  document.body.appendChild(el);
+  setTimeout(function(){el.style.transform='translateX(-50%) translateY(0)'},10);
+  setTimeout(function(){el.style.opacity='0';setTimeout(function(){el.remove();if(cb)cb()},300)},2000);
+}
+</script>
+</body>
+</html>
