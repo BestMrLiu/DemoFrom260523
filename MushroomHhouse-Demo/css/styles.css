@@ -1,0 +1,252 @@
+/* ============================================
+   菌语山房 · Junyu Shanfang
+   Responsive · Irregular shapes · Layered UI
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+
+:root {
+  --cream:#FBF7F0; --paper:#F4EDE0; --mushroom:#E8DCC8;
+  --amber:#C89240; --amber-gold:#DAA840; --bark:#2B1A0E;
+  --text:#1A1008; --text-mid:#5C4A35; --text-soft:#9B8B70;
+  --white:#FFFDF8; --max:1280px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:"Noto Sans SC","PingFang SC",sans-serif;font-size:16px;line-height:1.8;color:var(--text);background:var(--white);overflow-x:hidden}
+h1,h2,h3{font-family:"Noto Serif SC",serif;font-weight:700;line-height:1.15}
+h1{font-size:clamp(2.5rem,7vw,7rem)}
+h2{font-size:clamp(1.6rem,4.5vw,3.5rem)}
+h3{font-size:clamp(1rem,2.5vw,1.6rem)}
+
+/* ====== NAVIGATION ====== */
+.nav{position:fixed;top:0;left:0;width:100%;height:72px;z-index:100;transition:.4s}
+.nav.scrolled{background:rgba(255,253,248,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.nav.scrolled .nav-brand{color:var(--bark)}
+.nav.scrolled .nav-links a{color:var(--text-mid)}
+.nav-in{max-width:var(--max);margin:0 auto;padding:0 40px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:"Noto Serif SC",serif;font-size:1.2rem;font-weight:700;color:rgba(255,255,255,.92);text-decoration:none;letter-spacing:.03em;transition:color .4s}
+.nav.menu-open .nav-brand{color:var(--bark)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.85rem;color:rgba(255,255,255,.75);text-decoration:none;font-weight:500;position:relative;transition:color .4s}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--amber);transition:width .3s}
+.nav-links a:hover{color:rgba(255,255,255,1)}
+.nav-links a:hover::after{width:100%}
+.nav.scrolled .nav-links a:hover{color:var(--bark)}
+
+/* Hamburger */
+.nav-ham{display:none;flex-direction:column;gap:5px;width:30px;height:30px;background:none;border:none;cursor:pointer;z-index:200;padding:0}
+.nav-ham span{display:block;width:24px;height:2px;background:rgba(255,255,255,.85);border-radius:1px;transition:.3s;transform-origin:center}
+.nav-ham.open span{background:var(--bark)!important}
+.nav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-ham.open span:nth-child(2){opacity:0}
+.nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav.scrolled .nav-ham span{background:var(--bark)}
+.nav.scrolled .nav-ham.open span{background:var(--bark)!important}
+
+.mobile-panel{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,253,248,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity .35s}
+.mobile-panel.show{opacity:1;pointer-events:auto}
+.mobile-panel a{font-family:"Noto Serif SC",serif;font-size:1.6rem;color:var(--bark);text-decoration:none;font-weight:600}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-ham{display:flex}
+  .nav-in{padding:0 24px}
+}
+
+/* ====== HERO — irregular mask bottom + spore rain ====== */
+.hero{min-height:100dvh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:-40px -40px 0 -40px;background:url('../assets/images/hero-tremella-macro.jpg') center/cover no-repeat;z-index:0}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(251,247,240,.92) 0%,rgba(251,247,240,.35) 40%,rgba(251,247,240,0) 60%)}
+
+.spore{position:absolute;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle at 35% 35%,rgba(200,146,64,.7),rgba(200,146,64,.05));animation:sporeFall linear infinite}
+.spore:nth-child(1){width:10px;height:10px;left:10%;animation-duration:9s}
+.spore:nth-child(2){width:6px;height:6px;left:25%;animation-duration:6s;animation-delay:1.5s}
+.spore:nth-child(3){width:12px;height:12px;left:45%;animation-duration:11s;animation-delay:2s}
+.spore:nth-child(4){width:7px;height:7px;left:65%;animation-duration:7s;animation-delay:.5s}
+.spore:nth-child(5){width:9px;height:9px;left:80%;animation-duration:8s;animation-delay:3s}
+.spore:nth-child(6){width:5px;height:5px;left:15%;animation-duration:5s;animation-delay:1.5s}
+.spore:nth-child(7){width:11px;height:11px;left:55%;animation-duration:10s;animation-delay:2.5s}
+.spore:nth-child(8){width:8px;height:8px;left:72%;animation-duration:7.5s;animation-delay:3.5s}
+@keyframes sporeFall{0%{transform:translate(0,-10vh) scale(.5);opacity:0}20%{opacity:.85;transform:scale(1)}80%{opacity:.2}100%{transform:translate(45px,105vh) scale(.6);opacity:0}}
+
+.hero-content{position:relative;z-index:2;padding:0 40px clamp(40px,8vh,100px);max-width:var(--max);margin:0 auto;width:100%}
+.hero-content h1{color:var(--bark);margin-bottom:16px}
+.hero-content h1 .sub{display:block;font-size:.32em;font-weight:400;color:var(--text-mid);letter-spacing:.1em;margin-top:6px}
+.hero-content p{font-size:clamp(.9rem,1.8vw,1.05rem);color:var(--text-mid);max-width:480px;line-height:1.9}
+.hero-label{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;font-weight:700;letter-spacing:.15em;color:var(--amber);margin-bottom:20px}
+.hero-label::before{content:'';width:20px;height:1.5px;background:var(--amber)}
+
+@media(max-width:768px){
+  .hero-content{padding:0 24px 64px}
+  .hero-bg{inset:-20px -20px 0 -20px}
+}
+
+/* ====== BELIEF STRIP ====== */
+.belief{padding:clamp(40px,6vw,80px) 0;text-align:center;overflow:hidden}
+.belief-words{display:flex;justify-content:center;gap:clamp(28px,8vw,80px)}
+.belief-w{font-family:"Noto Serif SC",serif;font-size:clamp(3rem,10vw,8rem);font-weight:900;color:var(--mushroom);transition:color .5s;cursor:default;letter-spacing:-.02em}
+.belief-w:hover{color:var(--amber)}
+
+/* ====== STORY — image bleeds right ====== */
+.story{padding:0;display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.story-img-wrap{position:relative;overflow:hidden;min-height:60vh}
+.story-img{position:absolute;inset:0;background:url('../assets/images/story-mushroom-farm.jpg') center/cover no-repeat}
+.story-img::after{content:'';position:absolute;top:0;right:0;width:100px;height:100%;background:linear-gradient(to right,transparent,var(--white))}
+.story-text{padding:clamp(48px,8vh,100px) clamp(28px,5vw,64px);display:flex;flex-direction:column;justify-content:center;position:relative}
+.story-text::before{content:'';position:absolute;top:48px;left:0;width:2px;height:36px;background:var(--amber);border-radius:1px}
+.story-text h2{margin-bottom:20px}
+.story-text p{color:var(--text-mid);line-height:2.1;font-size:clamp(.9rem,1.5vw,1.02rem);max-width:440px}
+.story-text p+p{margin-top:14px}
+.story-meta{display:flex;gap:clamp(24px,4vw,40px);margin-top:32px;padding-top:20px;border-top:1px solid rgba(0,0,0,.06)}
+.meta-item .num{font-family:"Noto Serif SC",serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--amber);display:block;line-height:1}
+.meta-item .lbl{font-size:.78rem;color:var(--text-soft);margin-top:2px}
+
+@media(max-width:768px){
+  .story{grid-template-columns:1fr}
+  .story-img-wrap{min-height:40vh}
+  .story-img::after{display:none}
+  .story-text{padding:48px 24px}
+  .story-text::before{top:48px}
+}
+
+/* ====== DATA FILM STRIP ====== */
+.data-strip{padding:clamp(48px,8vw,80px) 0}
+.data-track{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(24px,calc((100vw - var(--max))/2)) 8px;-ms-overflow-style:none;scrollbar-width:none}
+.data-track::-webkit-scrollbar{display:none}
+.data-frame{flex-shrink:0;width:clamp(180px,25vw,280px);scroll-snap-align:start;padding:clamp(24px,5vw,40px) clamp(20px,4vw,36px);text-align:center;border-right:1px solid rgba(0,0,0,.06)}
+.data-frame:last-child{border-right:none}
+.data-frame .df-num{font-family:"Noto Serif SC",serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;color:var(--amber);line-height:1;display:block}
+.data-frame .df-unit{font-size:.9rem;color:var(--amber);margin-top:2px}
+.data-frame .df-label{font-size:clamp(.7rem,1.2vw,.84rem);color:var(--text-soft);margin-top:8px;line-height:1.4}
+
+/* ====== PRODUCTS — scattered overlapping cards ====== */
+.products{padding:clamp(60px,10vw,100px) 40px;background:var(--cream)}
+.products-head{text-align:center;margin-bottom:clamp(40px,8vw,72px)}
+.products-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;justify-items:center}
+.pcard{background:var(--white);max-width:360px;width:100%;position:relative;box-shadow:0 8px 32px rgba(43,26,14,.06);transition:.4s cubic-bezier(.25,.1,.25,1)}
+.pcard:nth-child(1){transform:rotate(-2deg);margin-top:0}
+.pcard:nth-child(2){transform:rotate(1.5deg);margin-top:clamp(24px,5vw,60px)}
+.pcard:nth-child(3){transform:rotate(-1deg);margin-top:clamp(12px,3vw,30px)}
+.pcard:hover{transform:rotate(0deg)!important;z-index:10;box-shadow:0 20px 56px rgba(43,26,14,.14)}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:18px;background:var(--white);z-index:1;clip-path:polygon(0 0,8% 7px,14% 3px,22% 11px,30% 4px,38% 13px,46% 5px,54% 12px,62% 6px,70% 10px,78% 4px,86% 9px,92% 3px,98% 7px,100% 0)}
+.pcard .pimg{width:100%;aspect-ratio:4/3;position:relative;overflow:hidden}
+.pcard:nth-child(1) .pimg{background:url('../assets/images/product-whole-tremella.jpg') center/cover no-repeat}
+.pcard:nth-child(2) .pimg{background:url('../assets/images/product-broken-tremella.jpg') center/cover no-repeat}
+.pcard:nth-child(3) .pimg{background:url('../assets/images/product-tremella-pack.jpg') center/cover no-repeat}
+.pbody{padding:clamp(20px,4vw,28px)}
+.pbody h3{font-size:clamp(1rem,2vw,1.15rem);color:var(--bark);margin-bottom:4px}
+.pbody .en{font-size:.78rem;color:var(--text-soft);display:block;margin-bottom:10px}
+.pbody p{font-size:clamp(.78rem,1.3vw,.84rem);color:var(--text-mid);line-height:1.7}
+.ptags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.ptag{font-size:.66rem;font-weight:700;padding:2px 10px;background:rgba(200,146,64,.1);color:var(--amber);border-radius:100px}
+
+@media(max-width:768px){
+  .products{padding:64px 24px}
+  .pcard{transform:none!important;margin-top:0!important}
+}
+
+/* ====== NUTRITION — editorial big numbers ====== */
+.nutrition{padding:clamp(60px,10vw,100px) 40px;text-align:center}
+.nutrition h2{margin-bottom:clamp(36px,6vw,64px)}
+.nutri-grid{max-width:900px;margin:0 auto;display:flex;justify-content:center;gap:clamp(28px,8vw,72px);flex-wrap:wrap}
+.nutri-stat{text-align:center;transition:.3s}
+.nutri-stat:hover{transform:translateY(-4px)}
+.nutri-stat .nval{font-family:"Noto Serif SC",serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:900;color:var(--bark);line-height:1;display:block}
+.nutri-stat .nval em{color:var(--amber);font-style:normal}
+.nutri-stat .nunit{font-size:.85rem;color:var(--text-soft);margin-top:4px;display:block}
+
+/* ====== PROCESS — organic mycelium timeline ====== */
+.process{padding:clamp(60px,10vw,100px) 40px;background:var(--cream)}
+.process-head{text-align:center;margin-bottom:clamp(40px,8vw,72px)}
+.process-line{max-width:600px;margin:0 auto;position:relative}
+.process-line::before{content:'';position:absolute;left:30px;top:30px;bottom:30px;width:2px;background:linear-gradient(to bottom,transparent,var(--amber) 10%,var(--amber) 90%,transparent);border-radius:1px}
+.pstep{display:grid;grid-template-columns:60px 1fr;gap:28px;padding:clamp(20px,4vw,28px) 0;position:relative;align-items:center}
+.pstep:first-child{padding-top:0}
+.pstep:last-child{padding-bottom:0}
+.pdot{width:60px;height:60px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-family:"Noto Serif SC",serif;font-size:1.4rem;color:var(--amber);position:relative;z-index:1;box-shadow:0 4px 16px rgba(43,26,14,.06);transition:.35s}
+.pstep:nth-child(even) .pdot{transform:translateX(-6px)}
+.pstep:nth-child(odd) .pdot{transform:translateX(6px)}
+.pstep:hover .pdot{background:var(--amber);color:var(--white);transform:translateX(0)!important;box-shadow:0 8px 24px rgba(200,146,64,.3)}
+.pbody h3{font-size:clamp(.95rem,1.8vw,1.05rem);margin-bottom:4px;color:var(--bark)}
+.pbody p{font-size:clamp(.8rem,1.3vw,.85rem);color:var(--text-mid);line-height:1.7}
+.pbody .pmeta{font-size:.73rem;color:var(--text-soft);margin-top:6px;display:block;letter-spacing:.04em}
+
+@media(max-width:600px){
+  .process{padding:64px 24px}
+  .pstep{grid-template-columns:48px 1fr;gap:18px}
+  .pdot{width:48px;height:48px;font-size:1.1rem}
+  .process-line::before{left:24px}
+}
+
+/* ====== RECIPES — centered overlapping polaroids ====== */
+.recipes{padding:clamp(60px,10vw,100px) 40px;overflow:visible}
+.recipes-head{text-align:center;margin-bottom:clamp(40px,8vw,64px)}
+.recipes-wall{max-width:900px;margin:0 auto;position:relative;min-height:clamp(300px,50vh,440px);display:flex;align-items:center;justify-content:center}
+.rcard{position:absolute;width:clamp(220px,28vw,280px);max-width:90vw;background:var(--paper);padding:clamp(24px,4vw,36px) clamp(22px,3vw,32px);box-shadow:0 8px 32px rgba(43,26,14,.08);transition:.4s cubic-bezier(.25,.1,.25,1);border-radius:4px}
+.rcard:nth-child(1){left:clamp(0px,5vw,40px);top:50%;transform:translateY(-50%) rotate(-5deg);z-index:1}
+.rcard:nth-child(2){left:50%;top:50%;transform:translate(-50%,-50%) rotate(2deg);z-index:3}
+.rcard:nth-child(3){right:clamp(0px,5vw,40px);top:50%;transform:translateY(-50%) rotate(-3deg);z-index:2}
+.rcard:hover{transform:translate(-50%,-50%) rotate(0deg)!important;z-index:10!important;box-shadow:0 20px 48px rgba(43,26,14,.16)}
+.rcard:nth-child(1):hover{transform:translateY(-50%) rotate(0deg)!important}
+.rcard:nth-child(3):hover{transform:translateY(-50%) rotate(0deg)!important}
+.rcard h3{font-size:clamp(.95rem,1.8vw,1.1rem);margin-bottom:8px;color:var(--bark)}
+.rcard p{font-size:clamp(.78rem,1.3vw,.84rem);color:var(--text-mid);line-height:1.7}
+.rcard .rt{display:inline-block;margin-top:12px;font-size:.76rem;color:var(--amber);font-weight:700}
+
+@media(max-width:768px){
+  .recipes{padding:64px 24px}
+  .recipes-wall{min-height:auto;flex-direction:column;gap:20px}
+  .rcard{position:static!important;width:100%!important;max-width:400px!important;transform:none!important;margin:0 auto!important}
+}
+
+/* ====== CTA ====== */
+.cta{background:var(--bark);padding:clamp(72px,12vw,120px) 40px;text-align:center;overflow:hidden;position:relative}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(200,146,64,.12),transparent 60%);pointer-events:none}
+.cta h2{color:var(--white);font-size:clamp(1.8rem,5vw,4rem);line-height:1.2;margin-bottom:28px;position:relative;z-index:1}
+.cta h2 em{color:var(--amber-gold);font-style:normal;display:block;font-size:.55em;font-weight:400;margin-top:8px}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:clamp(14px,2vw,18px) clamp(32px,5vw,44px);background:var(--white);color:var(--bark);border-radius:100px;font-size:1rem;font-weight:700;text-decoration:none;letter-spacing:.02em;transition:.3s;position:relative;z-index:1}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.25)}
+
+/* ====== CONTACT ====== */
+.contact{padding:clamp(60px,10vw,100px) 40px}
+.contact-head{text-align:center;margin-bottom:clamp(36px,6vw,56px)}
+.contact-head h2{margin-bottom:8px}
+.contact-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:900px;margin:0 auto clamp(36px,6vw,48px)}
+.cc{background:var(--cream);padding:clamp(24px,4vw,32px);text-align:center;border-radius:16px;transition:.3s}
+.cc:hover{transform:translateY(-3px)}
+.cc .ic{font-size:1.6rem;margin-bottom:10px}
+.cc h4{font-size:.9rem;margin-bottom:6px}
+.cc p{font-size:.82rem;color:var(--text-mid);line-height:1.6}
+.cform-wrap{max-width:520px;margin:0 auto;background:var(--cream);padding:clamp(28px,5vw,40px);border-radius:16px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.78rem;font-weight:700;color:var(--bark);margin-bottom:6px}
+.fg input,.fg textarea{width:100%;padding:12px 16px;background:var(--white);border:1px solid rgba(0,0,0,.06);border-radius:12px;font-family:inherit;font-size:.92rem;outline:none}
+.fg input:focus,.fg textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(200,146,64,.06)}
+.fg textarea{min-height:110px;resize:vertical}
+.fsub{width:100%;padding:14px;background:var(--amber);color:var(--white);border:none;border-radius:100px;font-family:inherit;font-size:.92rem;font-weight:700;cursor:pointer;letter-spacing:.03em;transition:.3s}
+.fsub:hover{background:var(--amber-gold)}
+.fdone{display:none;padding:40px 0;text-align:center}
+.fdone.show{display:block}.fdone.show~form{display:none}
+
+@media(max-width:600px){
+  .contact{padding:64px 24px}
+  .cform-wrap{padding:28px 20px}
+}
+
+/* ====== FOOTER ====== */
+.footer{background:var(--bark);color:rgba(255,255,255,.45);padding:clamp(48px,8vw,64px) 40px 24px}
+.fgrid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(28px,5vw,48px);padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:20px}
+.fbrand{font-family:"Noto Serif SC",serif;font-size:1.15rem;color:var(--white);display:block;margin-bottom:8px}
+.fgrid p{font-size:.8rem;color:rgba(255,255,255,.28);line-height:1.7;max-width:240px}
+.fcol h5{font-size:.75rem;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:10px;letter-spacing:.06em}
+.fcol ul{list-style:none}.fcol li{margin-bottom:6px}
+.fcol a,.fcol span{font-size:.82rem;color:rgba(255,255,255,.28);text-decoration:none}
+.fcol a:hover{color:var(--amber-gold)}
+.fbot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.76rem;max-width:var(--max);margin:0 auto}
+@media(max-width:768px){.fgrid{grid-template-columns:1fr;gap:24px}.footer{padding:40px 24px 20px}}
+
+/* ====== REVEAL ====== */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
