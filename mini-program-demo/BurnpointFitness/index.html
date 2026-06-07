@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>燃点健身 — 预约小程序Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="phone-frame">
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="status-left">9:41</span>
+    <span class="status-right">
+      <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+      <span class="wifi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1.5" fill="currentColor" stroke="none"/></svg></span>
+      <span class="battery"><span class="battery-body"><span class="battery-fill"></span></span><span class="battery-cap"></span></span>
+    </span>
+  </div>
+
+  <!-- App Header -->
+  <div class="app-header">
+    <span class="title" id="headerTitle">燃点健身</span>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+
+    <!-- ===== TAB 1: 首页 ===== -->
+    <div class="tab-content active" id="tab-home">
+      <div class="brand-bar">
+        <div class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M13 2L3 14h6l-2 8 10-12h-6l2-8z"/></svg></div>
+        <div class="brand-info">
+          <div class="brand-name">BurnPoint Fitness</div>
+          <div class="brand-tag">点燃你的每一刻 · Ignite Every Moment</div>
+        </div>
+      </div>
+
+      <div class="banner banner-a">
+        <h3>新用户首单 7 折</h3>
+        <div class="banner-sub">首次体验任意课程即享优惠</div>
+        <span class="btn-inline" data-nav="booking">立即预约</span>
+      </div>
+
+      <div class="section-row"><h3>训练项目</h3><span class="more">4 类 8 项</span></div>
+      <div class="svc-grid">
+        <div class="svc-card ct-personal" data-nav="booking">
+          <div class="svc-card-body">
+            <h4>Personal Training</h4><div class="svc-sub">私教一对一 · 60/90min</div><div class="svc-price">&yen;380 起</div>
+          </div>
+        </div>
+        <div class="svc-card ct-group" data-nav="booking">
+          <div class="svc-card-body">
+            <h4>Group Class</h4><div class="svc-sub">瑜伽 / HIIT / 单车</div><div class="svc-price">&yen;128 起</div>
+          </div>
+        </div>
+        <div class="svc-card ct-boxing" data-nav="booking">
+          <div class="svc-card-body">
+            <h4>Boxing Burn</h4><div class="svc-sub">拳击燃脂 · 60min</div><div class="svc-price">&yen;198 起</div>
+          </div>
+        </div>
+        <div class="svc-card ct-yoga" data-nav="booking">
+          <div class="svc-card-body">
+            <h4>Yoga Flow</h4><div class="svc-sub">瑜伽舒展 · 60/90min</div><div class="svc-price">&yen;158 起</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-row"><h3>燃点数据</h3></div>
+      <div class="stat-row">
+        <div class="stat-item"><div class="stat-num">800+</div><div class="stat-label">活跃会员</div></div>
+        <div class="stat-item"><div class="stat-num">4.9</div><div class="stat-label">学员评分</div></div>
+        <div class="stat-item"><div class="stat-num">12h</div><div class="stat-label">每日运营</div></div>
+      </div>
+
+      <div class="section-row"><h3>教练团队</h3><span class="more">4 位专业教练</span></div>
+      <div class="coach-scroll">
+        <div class="coach-chip"><div class="cc-pic cc-pic-1"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div><h5>Alex</h5><div class="cc-role">力量训练</div></div>
+        <div class="coach-chip"><div class="cc-pic cc-pic-2"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 8 0v2"/></svg></div><h5>Mia</h5><div class="cc-role">流瑜伽</div></div>
+        <div class="coach-chip"><div class="cc-pic cc-pic-3"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div><h5>Jay</h5><div class="cc-role">拳击燃脂</div></div>
+        <div class="coach-chip"><div class="cc-pic cc-pic-4"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 8 0v2"/></svg></div><h5>Sofia</h5><div class="cc-role">功能训练</div></div>
+      </div>
+
+      <div class="banner banner-b" style="margin-top:14px;">
+        <h3>今日还有空位</h3>
+        <div class="banner-sub">锁定你的专属训练时段</div>
+        <span class="btn-inline" data-nav="booking">去预约</span>
+      </div>
+    </div>
+
+    <!-- ===== TAB 2: 预约 ===== -->
+    <div class="tab-content" id="tab-booking">
+      <div class="booking-hdr"><h3>预约训练</h3><p>4 步完成，即刻锁定专属时段</p></div>
+
+      <div class="steps-row" id="bookingSteps">
+        <div class="step-item active" data-step="1"><div class="step-dot">1</div><div class="step-label-mini">选项目</div></div>
+        <div class="step-item" data-step="2"><div class="step-dot">2</div><div class="step-label-mini">选日期</div></div>
+        <div class="step-item" data-step="3"><div class="step-dot">3</div><div class="step-label-mini">选时段</div></div>
+        <div class="step-item" data-step="4"><div class="step-dot">4</div><div class="step-label-mini">确认</div></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="booking-step active" data-step="1">
+        <h4>选择训练项目</h4><p class="step-note">点击选择你要预约的课程</p>
+        <div class="svc-select-list" id="serviceSelectList">
+          <div class="svc-select-item" data-service="personal-60"><div class="ssi-icon ssi-icon-a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M16 8h-2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2M8 8v8"/></svg></div><div class="ssi-info"><h5>Personal Training</h5><div class="ssi-sub">私教一对一 · 60分钟</div></div><span class="ssi-price">&yen;380</span></div>
+          <div class="svc-select-item" data-service="personal-90"><div class="ssi-icon ssi-icon-a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M16 8h-2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2M8 8v8"/></svg></div><div class="ssi-info"><h5>Personal Training Pro</h5><div class="ssi-sub">私教一对一 · 90分钟</div></div><span class="ssi-price">&yen;460</span></div>
+          <div class="svc-select-item" data-service="group-flow"><div class="ssi-icon ssi-icon-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="5" r="2"/><path d="M10 22v-5l-3-3V8"/><path d="M14 22v-5l3-3V8"/></svg></div><div class="ssi-info"><h5>Group · 流瑜伽</h5><div class="ssi-sub">精品团课 · 60分钟</div></div><span class="ssi-price">&yen;128</span></div>
+          <div class="svc-select-item" data-service="group-hiit"><div class="ssi-icon ssi-icon-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="7,14 10,11 13,14 17,10"/><circle cx="12" cy="12" r="10"/></svg></div><div class="ssi-info"><h5>Group · HIIT</h5><div class="ssi-sub">精品团课 · 45分钟</div></div><span class="ssi-price">&yen;128</span></div>
+          <div class="svc-select-item" data-service="group-spin"><div class="ssi-icon ssi-icon-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5"/><path d="M12 7v3M12 14v3M7 12h3M14 12h3"/></svg></div><div class="ssi-info"><h5>Group · 动感单车</h5><div class="ssi-sub">精品团课 · 45分钟</div></div><span class="ssi-price">&yen;128</span></div>
+          <div class="svc-select-item" data-service="boxing"><div class="ssi-icon ssi-icon-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 10l3-3 4 4 3-3v10H7V10z"/><circle cx="12" cy="9" r="1.5"/></svg></div><div class="ssi-info"><h5>Boxing Burn</h5><div class="ssi-sub">拳击燃脂 · 60分钟</div></div><span class="ssi-price">&yen;198</span></div>
+          <div class="svc-select-item" data-service="yoga-60"><div class="ssi-icon ssi-icon-d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="5" r="2"/><path d="M10 22v-5l-3-3V8"/><path d="M14 22v-5l3-3V8"/></svg></div><div class="ssi-info"><h5>Yoga Flow</h5><div class="ssi-sub">瑜伽舒展 · 60分钟</div></div><span class="ssi-price">&yen;158</span></div>
+          <div class="svc-select-item" data-service="yoga-90"><div class="ssi-icon ssi-icon-d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="5" r="2"/><path d="M10 22v-5l-3-3V8"/><path d="M14 22v-5l3-3V8"/></svg></div><div class="ssi-info"><h5>Yoga Flow Deep</h5><div class="ssi-sub">瑜伽舒展 · 90分钟</div></div><span class="ssi-price">&yen;218</span></div>
+        </div>
+        <div class="step-nav"><div></div><button class="btn-sm btn-sm-primary" id="bookNext2" disabled>下一步</button></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="booking-step" data-step="2">
+        <h4>选择训练日期</h4><p class="step-note">可预约未来 7 天</p>
+        <div class="cal-month-label" id="calendarMonthLabel"></div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <div class="cal-legend"><span class="leg-avail">可预约</span><span class="leg-full">已约满</span></div>
+        <div class="step-nav"><button class="btn-sm btn-sm-back" id="bookBack1">上一步</button><button class="btn-sm btn-sm-primary" id="bookNext3" disabled>下一步</button></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="booking-step" data-step="3">
+        <h4>选择时段</h4><p class="step-note" id="bookDateHint"></p>
+        <div class="ts-groups">
+          <div class="ts-group"><div class="tsg-label">可选课程时段</div><div class="ts-row" id="slotMorning"></div></div>
+        </div>
+        <div class="step-nav"><button class="btn-sm btn-sm-back" id="bookBack2">上一步</button><button class="btn-sm btn-sm-primary" id="bookNext4" disabled>下一步</button></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="booking-step" data-step="4">
+        <h4>确认预约</h4><p class="step-note">填写信息以完成预约</p>
+        <div class="summary-card">
+          <div class="sm-row"><span class="sm-k">项目</span><span class="sm-v" id="sumSvc">-</span></div>
+          <div class="sm-row"><span class="sm-k">日期</span><span class="sm-v" id="sumDate">-</span></div>
+          <div class="sm-row"><span class="sm-k">时段</span><span class="sm-v" id="sumTime">-</span></div>
+          <div class="sm-div"></div>
+          <div class="sm-row"><span class="sm-k">预估价格</span><span class="sm-v" id="sumPrice">-</span></div>
+        </div>
+        <div class="form-g"><label>姓名 <span class="req">*</span></label><input type="text" class="f-input" id="inputName" placeholder="请输入姓名" maxlength="20"><span class="f-err">请输入姓名</span></div>
+        <div class="form-g"><label>手机号 <span class="req">*</span></label><input type="tel" class="f-input" id="inputPhone" placeholder="请输入手机号码" maxlength="11"><span class="f-err">请输入有效的11位手机号</span></div>
+        <div class="form-g">
+          <label>验证码 <span class="req">*</span></label>
+          <div class="verify-row"><input type="text" class="f-input" id="inputCode" placeholder="请输入验证码" maxlength="4"><button type="button" class="vcode-btn" id="verifyBtn">获取验证码</button></div>
+          <span class="f-err" style="display:none;">请输入4位验证码</span>
+          <div class="vcode-hint">演示版：输入任意 4 位数字即可</div>
+        </div>
+        <div class="form-g"><label>备注</label><input type="text" class="f-input" id="inputNote" placeholder="选填"></div>
+        <div class="step-nav"><button class="btn-sm btn-sm-back" id="bookBack3">上一步</button><button class="btn-sm btn-sm-dark" id="submitBooking">确认预约</button></div>
+      </div>
+    </div>
+
+    <!-- ===== TAB 3: 我的 ===== -->
+    <div class="tab-content" id="tab-profile">
+
+      <!-- UNLOGGED -->
+      <div id="unloggedView">
+        <div class="login-hero">
+          <div class="lh-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+          <h2>欢迎来到燃点健身</h2>
+          <p>登录后可查看预约记录与管理训练计划</p>
+          <div class="login-btns">
+            <button class="login-btn login-btn-wechat" id="loginWechat">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM3 12a9 9 0 1 1 9 9c-.6 0-1.2-.06-1.8-.18L7 22l1.2-3.6A8.94 8.94 0 0 1 3 12z"/></svg>
+              微信一键登录
+            </button>
+            <button class="login-btn login-btn-phone" id="loginPhone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              手机号登录
+            </button>
+          </div>
+          <p class="login-agreement">登录即同意《用户协议》和《隐私政策》</p>
+        </div>
+      </div>
+
+      <!-- LOGGED IN -->
+      <div id="loggedView" style="display:none;">
+        <div class="profile-head">
+          <div class="ph-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+          <div class="ph-info"><h3 id="profileName">燃点会员</h3><p id="profilePhone">138****8888</p></div>
+        </div>
+        <div class="section-row"><h3>进行中的预约</h3></div>
+        <div id="upcomingBookings">
+          <div class="booking-record">
+            <div class="br-icon br-icon-upcoming"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
+            <div class="br-info"><h5>暂无预约</h5><div class="br-meta">去预约一门课程开始训练吧</div></div>
+          </div>
+        </div>
+        <div class="section-row" style="margin-top:16px;"><h3>历史记录</h3></div>
+        <div id="historyBookings">
+          <div class="booking-record">
+            <div class="br-icon br-icon-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="4,12 9,17 20,6"/></svg></div>
+            <div class="br-info"><h5>暂无历史记录</h5><div class="br-meta">完成训练后记录将出现在这里</div></div>
+          </div>
+        </div>
+        <div class="section-row" style="margin-top:16px;"><h3>设置</h3></div>
+        <div class="settings-list">
+          <div class="settings-item"><span class="si-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>我的资料</span><span class="si-arrow">›</span></div>
+          <div class="settings-item"><span class="si-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>训练目标</span><span class="si-arrow">›</span></div>
+          <div class="settings-item"><span class="si-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于燃点</span><span class="si-arrow">›</span></div>
+          <div class="settings-item" id="logoutBtn"><span class="si-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>退出登录</span><span class="si-arrow">›</span></div>
+        </div>
+
+        <p style="text-align:center;font-size:0.68rem;color:var(--text-3);margin-top:20px;">BurnPoint Fitness · Demo v1.0</p>
+      </div>
+
+      <!-- 商家入口 — 始终可见，无需先登录个人用户 -->
+      <div class="merchant-quick-entry" id="showMerchantLogin">
+        <div class="mqe-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 12h8M8 16h5"/></svg></div>
+        <div class="mqe-text">商家管理后台</div>
+        <div class="mqe-arrow">›</div>
+      </div>
+    </div>
+
+    <!-- ===== MERCHANT TAB 1: 数据中心 ===== -->
+    <div class="tab-content" id="tab-mdash">
+      <!-- Welcome -->
+      <div class="dash-welcome">
+        <div class="dw-left">
+          <div class="dw-date" id="dwDate">2026年6月7日 · 周日</div>
+          <div class="dw-greeting">早上好，Admin 👋</div>
+        </div>
+        <div class="dw-store">西湖店</div>
+      </div>
+
+      <!-- Hero Revenue Card -->
+      <div class="revenue-hero">
+        <div class="rh-main">
+          <div class="rh-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            今日收入
+          </div>
+          <div class="rh-val">&yen;2,860</div>
+          <div class="rh-sub"><span class="up up-arrow">▲</span> 12% 较昨日</div>
+        </div>
+        <div class="rh-chart-mini" id="rhMiniChart"></div>
+      </div>
+
+      <!-- 3 Stat Quick Cards -->
+      <div class="stat-quick-row">
+        <div class="sq-card sq-card-bookings">
+          <div class="sq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 10h18"/></svg></div>
+          <div class="sq-info"><div class="sq-val">8</div><div class="sq-label">今日预约</div></div>
+          <div class="sq-sub">剩余 3 空位</div>
+        </div>
+        <div class="sq-card sq-card-members">
+          <div class="sq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+          <div class="sq-info"><div class="sq-val">126</div><div class="sq-label">活跃会员</div></div>
+          <div class="sq-sub"><span class="up">▲ 18</span> 本月新增</div>
+        </div>
+        <div class="sq-card sq-card-attend">
+          <div class="sq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+          <div class="sq-info"><div class="sq-val">94%</div><div class="sq-label">出勤率</div></div>
+          <div class="sq-sub"><span class="up">▲ 2%</span> 本周</div>
+        </div>
+      </div>
+
+      <!-- Revenue Breakdown -->
+      <div class="revenue-breakdown">
+        <div class="rb-header"><h3>收入构成</h3><span class="rb-total">合计 ¥2,860</span></div>
+        <div class="rb-list" id="revenueBreakdown">
+          <div class="rb-item" data-pct="65" data-type="pt">
+            <div class="rb-bar-bg"><div class="rb-bar-fill rb-f-pt"></div></div>
+            <div class="rb-info">
+              <span class="rb-name"><span class="rb-dot rb-dot-pt"></span>私教一对一</span>
+              <span class="rb-amount">¥1,859</span>
+            </div>
+            <span class="rb-pct">65%</span>
+          </div>
+          <div class="rb-item" data-pct="22" data-type="group">
+            <div class="rb-bar-bg"><div class="rb-bar-fill rb-f-group"></div></div>
+            <div class="rb-info">
+              <span class="rb-name"><span class="rb-dot rb-dot-group"></span>团课</span>
+              <span class="rb-amount">¥629</span>
+            </div>
+            <span class="rb-pct">22%</span>
+          </div>
+          <div class="rb-item" data-pct="8" data-type="boxing">
+            <div class="rb-bar-bg"><div class="rb-bar-fill rb-f-boxing"></div></div>
+            <div class="rb-info">
+              <span class="rb-name"><span class="rb-dot rb-dot-boxing"></span>拳击燃脂</span>
+              <span class="rb-amount">¥229</span>
+            </div>
+            <span class="rb-pct">8%</span>
+          </div>
+          <div class="rb-item" data-pct="5" data-type="yoga">
+            <div class="rb-bar-bg"><div class="rb-bar-fill rb-f-yoga"></div></div>
+            <div class="rb-info">
+              <span class="rb-name"><span class="rb-dot rb-dot-yoga"></span>瑜伽舒展</span>
+              <span class="rb-amount">¥143</span>
+            </div>
+            <span class="rb-pct">5%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue Trend with Line -->
+      <div class="revenue-trend">
+        <div class="rt-header"><h3>近7日营收趋势</h3><span>单位：元</span></div>
+        <div class="trend-chart-area" id="trendChartArea">
+          <div class="trend-chart-svg" id="trendChartSvg"></div>
+          <div class="trend-labels" id="trendLabels"></div>
+        </div>
+      </div>
+
+      <!-- Today's Schedule -->
+      <div class="m-section">
+        <div class="ms-header">
+          <h3>今日课程</h3>
+          <span class="ms-badge">5 节</span>
+        </div>
+        <div class="m-booking-item">
+          <div class="mb-time">09:00</div>
+          <div class="mb-info"><h5>私教一对一 <span class="course-badge pt">私教</span></h5><div class="mb-sub">Alex · 60分钟</div></div>
+          <div class="mb-client"><span class="mb-dot on"></span>王女士</div>
+        </div>
+        <div class="m-booking-item">
+          <div class="mb-time">10:30</div>
+          <div class="mb-info"><h5>流瑜伽 <span class="course-badge yoga">团课</span></h5><div class="mb-sub">Mia · 60分钟 · 6人</div></div>
+          <div class="mb-client"><span class="mb-dot on"></span>团课</div>
+        </div>
+        <div class="m-booking-item">
+          <div class="mb-time">14:00</div>
+          <div class="mb-info"><h5>拳击燃脂 <span class="course-badge box">私教</span></h5><div class="mb-sub">Jay · 60分钟</div></div>
+          <div class="mb-client"><span class="mb-dot soon"></span>李先生</div>
+        </div>
+        <div class="m-booking-item">
+          <div class="mb-time">16:00</div>
+          <div class="mb-info"><h5>HIIT 燃脂 <span class="course-badge hiit">团课</span></h5><div class="mb-sub">Sofia · 45分钟 · 8人</div></div>
+          <div class="mb-client"><span class="mb-dot soon"></span>团课</div>
+        </div>
+        <div class="m-booking-item">
+          <div class="mb-time">19:00</div>
+          <div class="mb-info"><h5>瑜伽舒展 <span class="course-badge yoga">私教</span></h5><div class="mb-sub">Mia · 90分钟</div></div>
+          <div class="mb-client"><span class="mb-dot on"></span>赵女士</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="dash-actions">
+        <button class="dash-action-btn" id="exportReport">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          导出报表
+        </button>
+        <button class="dash-action-btn" id="viewAllBookings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 10h18"/></svg>
+          查看全部预约
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== MERCHANT TAB 2: 排期管理 ===== -->
+    <div class="tab-content" id="tab-msched">
+      <div class="sched-header">
+        <div class="sched-title-row">
+          <h3>排期管理</h3>
+          <span class="ms-badge" id="schedTotalBadge">共 18 节</span>
+        </div>
+        <div class="sched-week-pill">
+          <button class="sched-nav-btn" id="schedPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,4 7,12 15,20"/></svg></button>
+          <span class="sched-week-label" id="schedWeekLabel">6/1 - 6/7</span>
+          <button class="sched-nav-btn" id="schedNext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,4 17,12 9,20"/></svg></button>
+        </div>
+        <div class="sched-filter" id="schedFilter">
+          <span class="sf-item active" data-filter="all">全部</span>
+          <span class="sf-item" data-filter="pt">私教</span>
+          <span class="sf-item" data-filter="group">团课</span>
+          <span class="sf-item" data-filter="boxing">拳击</span>
+          <span class="sf-item" data-filter="yoga">瑜伽</span>
+        </div>
+      </div>
+
+      <!-- Day-Grouped Schedule List -->
+      <div class="sched-day-list" id="schedDayList"></div>
+
+      <!-- Quick Add -->
+      <div class="m-section" style="margin-top:16px;">
+        <div class="ms-header"><h3>快速排课</h3></div>
+        <div class="quick-sched-form">
+          <div class="qsf-row">
+            <select class="qsf-select" id="qsDay"><option value="0">周一</option><option value="1">周二</option><option value="2">周三</option><option value="3">周四</option><option value="4">周五</option><option value="5">周六</option><option value="6">周日</option></select>
+            <select class="qsf-select" id="qsTime"><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="10:30">10:30</option><option value="14:00">14:00</option><option value="15:00">15:00</option><option value="16:00">16:00</option><option value="17:00">17:00</option><option value="18:00">18:00</option><option value="19:00">19:00</option><option value="20:00">20:00</option></select>
+          </div>
+          <div class="qsf-row">
+            <select class="qsf-select" id="qsCourse"><option value="pt-60">私教一对一 · 60min</option><option value="pt-90">私教 Pro · 90min</option><option value="yoga">流瑜伽 · 60min</option><option value="hiit">HIIT · 45min</option><option value="spin">动感单车 · 45min</option><option value="boxing">拳击燃脂 · 60min</option></select>
+            <select class="qsf-select" id="qsCoach"><option value="Alex">Alex</option><option value="Mia">Mia</option><option value="Jay">Jay</option><option value="Sofia">Sofia</option></select>
+          </div>
+          <div class="qsf-conflict" id="qsfConflict">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="14" height="14"><polyline points="4,12 9,17 20,6"/></svg>
+            <span id="qsfConflictText">该时段空闲</span>
+          </div>
+          <button class="btn-sm btn-sm-primary" id="qsAdd" style="width:100%;margin-top:6px;">+ 添加排课</button>
+          <div class="qsf-msg" id="qsMsg"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MERCHANT TAB 3: 商家管理 ===== -->
+    <div class="tab-content" id="tab-mmanage">
+      <!-- Store Profile -->
+      <div class="merchant-profile">
+        <div class="mp-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 12h8M8 16h5"/></svg></div>
+        <div class="mp-info"><h3>燃点健身 · 杭州西湖店</h3><p>已认证商家 · admin</p></div>
+        <span class="mp-badge">营业中</span>
+      </div>
+
+      <!-- Week Overview -->
+      <div class="week-overview">
+        <div class="wo-header"><h3>本周概览</h3><span class="wo-date-range">6/1 - 6/7</span></div>
+        <div class="wo-grid">
+          <div class="wo-item">
+            <div class="wo-val">4</div>
+            <div class="wo-label">在职教练</div>
+          </div>
+          <div class="wo-item">
+            <div class="wo-val">8</div>
+            <div class="wo-label">课程项目</div>
+          </div>
+          <div class="wo-item">
+            <div class="wo-val">126</div>
+            <div class="wo-label">活跃会员</div>
+          </div>
+        </div>
+        <div class="wo-meta-row">
+          <div class="wo-meta-item">
+            <div class="wo-meta-val">¥12,480</div>
+            <div class="wo-meta-label">本周营收</div>
+          </div>
+          <div class="wo-meta-item">
+            <div class="wo-meta-val">42 笔</div>
+            <div class="wo-meta-label">本周预约</div>
+          </div>
+          <div class="wo-meta-item">
+            <div class="wo-meta-val">92%</div>
+            <div class="wo-meta-label">出勤率</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Management Functions -->
+      <div class="section-row"><h3>管理功能</h3></div>
+      <div class="settings-list settings-list-mgmt">
+        <div class="settings-item">
+          <span class="si-left">
+            <span class="si-icon-wrap si-ic-course"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></span>
+            <span class="si-text"><span class="si-title">课程管理</span><span class="si-desc">8门课程，2门满员待调整</span></span>
+          </span>
+          <span class="si-arrow">›</span>
+        </div>
+        <div class="settings-item">
+          <span class="si-left">
+            <span class="si-icon-wrap si-ic-coach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></span>
+            <span class="si-text"><span class="si-title">教练管理</span><span class="si-desc">4名教练，全部在岗</span></span>
+          </span>
+          <span class="si-arrow">›</span>
+        </div>
+        <div class="settings-item">
+          <span class="si-left">
+            <span class="si-icon-wrap si-ic-revenue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <span class="si-text"><span class="si-title">收入报表</span><span class="si-desc">本月累计 ¥32,400</span></span>
+          </span>
+          <span class="si-arrow">›</span>
+        </div>
+        <div class="settings-item">
+          <span class="si-left">
+            <span class="si-icon-wrap si-ic-store"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></span>
+            <span class="si-text"><span class="si-title">门店信息</span><span class="si-desc">300㎡ · 西湖区体育场路</span></span>
+          </span>
+          <span class="si-arrow">›</span>
+        </div>
+        <div class="settings-item">
+          <span class="si-left">
+            <span class="si-icon-wrap si-ic-account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+            <span class="si-text"><span class="si-title">账户设置</span><span class="si-desc">密码 · 子账号 · 通知</span></span>
+          </span>
+          <span class="si-arrow">›</span>
+        </div>
+      </div>
+
+      <!-- Coach Team -->
+      <div class="section-row" style="margin-top:16px;"><h3>教练团队</h3><span class="more">点击查看详情</span></div>
+      <div class="coach-scroll" style="justify-content:flex-start;gap:12px;" id="coachTeamScroll">
+        <div class="coach-chip coach-chip-clickable" data-coach="alex">
+          <div class="cc-pic cc-pic-1"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+          <h5>Alex</h5><div class="cc-role">力量训练</div>
+          <div class="cc-rating">4.9</div>
+        </div>
+        <div class="coach-chip coach-chip-clickable" data-coach="mia">
+          <div class="cc-pic cc-pic-2"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 8 0v2"/></svg></div>
+          <h5>Mia</h5><div class="cc-role">流瑜伽</div>
+          <div class="cc-rating">4.8</div>
+        </div>
+        <div class="coach-chip coach-chip-clickable" data-coach="jay">
+          <div class="cc-pic cc-pic-3"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+          <h5>Jay</h5><div class="cc-role">拳击燃脂</div>
+          <div class="cc-rating">4.9</div>
+        </div>
+        <div class="coach-chip coach-chip-clickable" data-coach="sofia">
+          <div class="cc-pic cc-pic-4"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 8 0v2"/></svg></div>
+          <h5>Sofia</h5><div class="cc-role">功能训练</div>
+          <div class="cc-rating">4.7</div>
+        </div>
+      </div>
+
+      <!-- Coach Detail Modal -->
+      <div class="coach-modal-overlay" id="coachDetailModal">
+        <div class="coach-modal-card" id="coachModalCard"></div>
+      </div>
+
+      <!-- Logout -->
+      <div class="section-row" style="margin-top:18px;"><h3></h3></div>
+      <div class="settings-item" id="merchantLogoutBtn" style="background:var(--bg-white);border-radius:var(--radius-sm);box-shadow:var(--shadow-xs);justify-content:center;gap:8px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E74C3C" width="18" height="18"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span style="color:#E74C3C;font-weight:600;">退出商家端</span>
+      </div>
+      <p style="text-align:center;font-size:0.68rem;color:var(--text-3);margin-top:12px;">商家管理端 · Demo v1.0</p>
+    </div>
+
+  </div>
+
+  <!-- Bottom Tab Bar -->
+  <div class="tab-bar" id="tabBar">
+    <div class="tab-item active" data-tab="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>首页</span></div>
+    <div class="tab-item" data-tab="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 10h18M8 2v4M16 2v4"/></svg><span>预约</span></div>
+    <div class="tab-item" data-tab="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg><span>我的</span></div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="m-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="4,12 9,17 20,6"/></svg></div>
+      <h3>预约成功</h3>
+      <p style="font-size:0.8rem;color:var(--text-2);">训练时段已锁定</p>
+      <div class="m-id" id="modalBookingId">BP-</div>
+      <p class="m-note">预约详情已通过短信发送</p>
+      <p class="m-note" style="opacity:0.55;">* 前端 Demo，不真实发送</p>
+      <button class="btn-sm btn-sm-primary" id="closeModal" style="margin-top:14px;width:100%;">知道了</button>
+    </div>
+  </div>
+
+  <!-- Merchant Login Modal -->
+  <div class="modal-overlay" id="merchantModal">
+    <div class="modal-box merchant-modal-box">
+      <div class="mq-close" id="merchantModalClose">&times;</div>
+      <div class="mq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 12h8M8 16h5"/></svg></div>
+      <h3>商家登录</h3>
+      <p class="mq-hint">演示账号：admin / 123456</p>
+      <div class="mq-form">
+        <div class="form-g"><input type="text" class="f-input" id="merchantUser" placeholder="请输入用户名"></div>
+        <div class="form-g"><input type="password" class="f-input" id="merchantPass" placeholder="请输入密码"></div>
+        <div class="mlf-error" id="merchantError">用户名或密码错误</div>
+        <button class="btn-sm btn-sm-primary" id="merchantLoginBtn" style="width:100%;margin-top:8px;">登录商家端</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
