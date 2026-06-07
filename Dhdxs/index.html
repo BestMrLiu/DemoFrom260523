@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代号大学生 / Evan - AI辅助开发者</title>
+  <meta name="description" content="用AI帮中小企业快速搭建数字化门面 - 官网、小程序、AI工具整合">
+
+  <!-- Open Graph（微信/朋友圈/社交媒体分享预览卡片） -->
+  <meta property="og:title" content="代号大学生 / Evan - AI辅助开发者">
+  <meta property="og:description" content="帮中小企业搭建官网与小程序，也为大学生提供Web实战辅导。AI驱动，快速交付。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.svg">
+
+  <!-- Fonts: Kanit for EN headings, Ma Shan Zheng for CN title, Noto Sans SC for CN body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            kanit: ['Kanit', 'sans-serif'],
+            sans: ['Noto Sans SC', 'sans-serif'],
+            hand: ['Ma Shan Zheng', 'cursive'],
+          },
+          colors: {
+            bg: '#0C0C0C',
+            'text-light': '#D7E2EA',
+            'text-muted': '#646973',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ========== GLOBAL RESET ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #__root { background: #0C0C0C; min-height: 100vh; overflow-x: clip; }
+    body { font-family: 'Noto Sans SC', 'Kanit', sans-serif; color: #D7E2EA; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+
+    /* ========== GRADIENT TEXT ========== */
+    .gradient-text {
+      background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ========== CONTACT BUTTON ========== */
+    .btn-contact {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 32px; border-radius: 999px;
+      background: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
+      box-shadow: 0px 4px 4px rgba(181, 1, 167, 0.25), inset 4px 4px 12px #7721B1;
+      color: #fff; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em;
+      text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;
+      outline: 2px solid #fff; outline-offset: -3px;
+      font-family: 'Kanit', sans-serif;
+    }
+    .btn-contact:hover { transform: translateY(-2px); box-shadow: 0px 8px 16px rgba(181, 1, 167, 0.35), inset 4px 4px 12px #7721B1; }
+    @media (min-width: 640px) { .btn-contact { padding: 14px 40px; } }
+    @media (min-width: 768px) { .btn-contact { padding: 16px 48px; } }
+
+    /* ========== LIVE PROJECT BUTTON ========== */
+    .btn-live {
+      display: inline-flex; align-items: center;
+      padding: 12px 32px; border-radius: 999px;
+      border: 2px solid #D7E2EA; color: #D7E2EA;
+      font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em;
+      text-decoration: none; transition: all 0.3s ease;
+      font-family: 'Kanit', sans-serif;
+    }
+    .btn-live:hover { background: rgba(215, 226, 234, 0.1); }
+    @media (min-width: 640px) { .btn-live { padding: 14px 40px; } }
+
+    /* ========== FADE IN (GSAP controlled via data attribute) ========== */
+    .fade-target { opacity: 0; }
+
+    /* ========== MARQUEE ========== */
+    .marquee-row { display: flex; gap: 12px; will-change: transform; }
+    .marquee-tile { flex-shrink: 0; width: 420px; height: 270px; border-radius: 16px; overflow: hidden; }
+    .marquee-tile img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ========== PROJECT CARD STACK ========== */
+    .project-stack-container { position: relative; }
+    .project-stack-card {
+      position: sticky; top: 96px;
+      border-radius: 40px; border: 2px solid #D7E2EA;
+      background: #0C0C0C; padding: 24px; overflow: hidden;
+      will-change: transform;
+    }
+    @media (min-width: 640px) { .project-stack-card { border-radius: 50px; padding: 32px; } }
+    @media (min-width: 768px) { .project-stack-card { border-radius: 60px; padding: 40px; top: 128px; } }
+
+    .project-img-grid {
+      display: grid; grid-template-columns: 40% 60%; gap: 16px; margin-top: 24px;
+    }
+    .project-img-col { display: flex; flex-direction: column; gap: 16px; }
+    .project-img { border-radius: 40px; overflow: hidden; }
+    @media (min-width: 640px) { .project-img { border-radius: 50px; } }
+    @media (min-width: 768px) { .project-img { border-radius: 60px; } }
+
+    /* ========== MAGNET EFFECT ========== */
+    .magnet-wrap { display: inline-block; will-change: transform; }
+
+    /* ========== ANIMATED TEXT ========== */
+    .char-reveal { display: inline; }
+    .char-reveal .char-placeholder { visibility: hidden; }
+    .char-reveal .char-visible { position: absolute; }
+
+    /* ========== ABOUT DECORATIVE IMAGES ========== */
+    .about-decor { position: absolute; pointer-events: none; z-index: 0; background: #0C0C0C; border-radius: 16px; overflow: hidden; }
+    .about-decor img { width: 100%; height: auto; display: block; mix-blend-mode: lighten; }
+
+    /* ========== SERVICES SECTION ========== */
+    .services-wrap { background: #FFFFFF; border-radius: 40px 40px 0 0; }
+    @media (min-width: 640px) { .services-wrap { border-radius: 50px 50px 0 0; } }
+    @media (min-width: 768px) { .services-wrap { border-radius: 60px 60px 0 0; } }
+
+    /* ========== FAQ ========== */
+    .faq-item { border: 1px solid rgba(215, 226, 234, 0.12); border-radius: 18px; overflow: hidden; transition: border-color 0.3s; }
+    .faq-item:hover { border-color: rgba(215, 226, 234, 0.3); }
+    .faq-question { width: 100%; padding: 22px 26px; background: none; border: none; text-align: left; color: #D7E2EA; font-size: 1rem; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Noto Sans SC', sans-serif; gap: 16px; }
+    .faq-arrow { width: 22px; height: 22px; flex-shrink: 0; transition: transform 0.3s ease; color: #646973; }
+    .faq-item.active .faq-arrow { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+    .faq-item.active .faq-answer { max-height: 300px; }
+    .faq-answer-inner { padding: 0 26px 22px; font-size: 0.95rem; line-height: 1.8; color: rgba(215, 226, 234, 0.6); }
+
+    /* ========== FORM INPUTS ========== */
+    .input-dark {
+      width: 100%; background: rgba(215, 226, 234, 0.05);
+      border: 1px solid rgba(215, 226, 234, 0.15); border-radius: 14px;
+      padding: 14px 18px; font-size: 0.95rem; color: #D7E2EA;
+      outline: none; transition: border-color 0.3s;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    .input-dark:focus { border-color: #B600A8; }
+    .input-dark::placeholder { color: rgba(215, 226, 234, 0.3); }
+
+    /* ========== HERO PORTRAIT (desktop: absolute bottom) ========== */
+    .hero-portrait-wrap {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      z-index: 0;
+    }
+    /* mobile: reorder between heading and bottom bar, in-flow, full width */
+    @media (max-width: 999px) {
+      .hero-heading-wrap { order: 1; }
+      .hero-portrait-wrap {
+        order: 2;
+        position: relative !important;
+        left: auto !important;
+        transform: none !important;
+        bottom: auto !important;
+        z-index: auto !important;
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        flex: 1 1 auto !important;
+        padding: 0.5rem 0;
+      }
+      .hero-bottom-bar {
+        order: 3;
+        margin-top: 0 !important;
+      }
+      .hero-portrait-wrap img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 55vh;
+      }
+      .hero-portrait-wrap .magnet-wrap {
+        height: auto !important;
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    @media (max-width: 999px) {
+      .marquee-tile { width: 280px; height: 180px; }
+    }
+    @media (max-width: 640px) {
+      .marquee-tile { width: 220px; height: 145px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="__root">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="relative min-h-screen flex flex-col overflow-x-clip">
+
+      <!-- Navbar -->
+      <nav class="fade-target relative z-50 flex items-center justify-between px-6 md:px-10 pt-6 md:pt-8" data-delay="0" data-y="-20">
+        <div class="flex items-center gap-8 md:gap-12">
+          <a href="#hero" class="text-sm md:text-lg lg:text-[1.4rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 font-kanit">Evan</a>
+        </div>
+        <div class="flex items-center gap-6 md:gap-10">
+          <a href="#about" class="text-sm md:text-lg lg:text-[1.4rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 font-kanit">About</a>
+          <a href="#services" class="text-sm md:text-lg lg:text-[1.4rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 font-kanit">Services</a>
+          <a href="#projects" class="text-sm md:text-lg lg:text-[1.4rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 font-kanit">Projects</a>
+          <a href="#contact" class="text-sm md:text-lg lg:text-[1.4rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 font-kanit">Contact</a>
+        </div>
+      </nav>
+
+      <!-- Hero Heading -->
+      <div class="hero-heading-wrap fade-target overflow-hidden mt-6 sm:mt-4 md:-mt-5" data-delay="0.15" data-y="40">
+        <h1 class="gradient-text font-hand font-black uppercase tracking-tight leading-none whitespace-nowrap w-full"
+            style="font-size: clamp(4rem, 14vw, 17.5vw);">
+          代号大学生
+        </h1>
+      </div>
+
+      <!-- Bottom bar (mt-auto pushes to bottom on desktop) -->
+      <div class="hero-bottom-bar fade-target relative z-10 flex justify-between items-end pb-7 sm:pb-8 md:pb-10 px-6 md:px-10 mt-auto" data-delay="0.35" data-y="20">
+        <div class="flex flex-col gap-1">
+          <p class="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug"
+             style="font-size: clamp(0.75rem, 1.4vw, 1.5rem);">
+            帮中小企业快速搭建数字化门面
+          </p>
+          <p class="text-[#646973] font-light leading-snug"
+             style="font-size: clamp(0.65rem, 1.1vw, 1.1rem);">
+            也为大学生提供Web实战辅导
+          </p>
+        </div>
+        <a href="#contact" class="btn-contact fade-target" data-delay="0.5" data-y="20" style="font-size: clamp(0.7rem, 1vw, 1rem);">Contact Me</a>
+      </div>
+
+      <!-- Hero Portrait (desktop: absolute bottom, z-0 behind bar / mobile: in-flow between heading and bar) -->
+      <div class="hero-portrait-wrap fade-target flex items-center justify-center overflow-hidden"
+           style="height: clamp(55vh, 75vh, 85vh);" data-delay="0.6" data-y="30">
+        <div class="magnet-wrap h-full" data-strength="3" data-padding="150">
+          <img src="images/hero-portrait.png" alt="Evan - AI辅助开发者"
+               class="h-full w-auto object-contain"
+               style="object-position: center bottom; filter: brightness(1.1) contrast(1.05);">
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== MARQUEE SECTION ==================== -->
+    <section id="marquee" class="relative bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden">
+      <!-- Row 1: moves RIGHT on scroll -->
+      <div class="marquee-row mb-3" id="marquee-row-1">
+        <!-- Content injected by JS -->
+      </div>
+      <!-- Row 2: moves LEFT on scroll -->
+      <div class="marquee-row" id="marquee-row-2">
+        <!-- Content injected by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section id="about" class="relative min-h-screen flex items-center justify-center px-5 sm:px-8 md:px-10 py-20 overflow-hidden bg-[#0C0C0C]">
+
+      <!-- Decorative 3D images -->
+      <div class="about-decor fade-target top-[4%] left-[1%] sm:left-[2%] md:left-[4%]" style="width: clamp(120px, 18vw, 210px);" data-delay="0.1" data-x="-80" data-y="0" data-dur="0.9">
+        <img src="images/about-decor-tl.jpg" alt="" loading="lazy">
+      </div>
+      <div class="about-decor fade-target bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%]" style="width: clamp(100px, 15vw, 180px);" data-delay="0.25" data-x="-80" data-y="0" data-dur="0.9">
+        <img src="images/about-decor-bl.jpg" alt="" loading="lazy">
+      </div>
+      <div class="about-decor fade-target top-[4%] right-[1%] sm:right-[2%] md:right-[4%]" style="width: clamp(120px, 18vw, 210px);" data-delay="0.15" data-x="80" data-y="0" data-dur="0.9">
+        <img src="images/about-decor-tr.jpg" alt="" loading="lazy">
+      </div>
+      <div class="about-decor fade-target bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%]" style="width: clamp(130px, 18vw, 220px);" data-delay="0.3" data-x="80" data-y="0" data-dur="0.9">
+        <img src="images/about-decor-br.jpg" alt="" loading="lazy">
+      </div>
+
+      <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center gap-10 sm:gap-14 md:gap-16">
+
+        <!-- Heading -->
+        <h2 class="fade-target gradient-text font-black uppercase leading-none tracking-tight font-kanit"
+            style="font-size: clamp(3rem, 12vw, 160px);" data-delay="0" data-y="40">
+          About
+          <span class="block font-normal" style="font-size: 0.25em; letter-spacing: 0.15em;">关于我</span>
+        </h2>
+
+        <!-- Animated paragraphs -->
+        <div id="about-text" class="text-[#D7E2EA] font-medium leading-relaxed max-w-[560px] flex flex-col gap-4"
+           style="font-size: clamp(1rem, 2vw, 1.35rem);">
+          <p class="about-text-line">大家好，我是Evan，一名AI辅助开发者。大学期间自研前端模板，至今已完成十余个官网与小程序开发项目。</p>
+          <p class="about-text-line">「代号大学生」这个品牌名，源于我从在校阶段就开始接实战项目。因为做得早、做得认真，所以一直沿用下来。</p>
+          <p class="about-text-line">日常做的事很简单：帮中小企业和个体商户把生意搬到线上 —— 官网、小程序、AI工具整合，一件件落地。我相信数字化的门槛不该那么高。用好AI工具，一个开发者能在几天内交付过去几周的工作量。这就是「代号大学生」在做的事。</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="fade-target flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-16" data-delay="0.4" data-y="20">
+          <div class="text-center">
+            <div class="gradient-text font-black font-kanit" style="font-size: clamp(2rem, 5vw, 3.5rem);">10+</div>
+            <div class="text-sm text-[#646973] mt-1">已完成项目</div>
+          </div>
+          <div class="text-center">
+            <div class="gradient-text font-black font-kanit" style="font-size: clamp(2rem, 5vw, 3.5rem);">10+</div>
+            <div class="text-sm text-[#646973] mt-1">AI辅助交付项目</div>
+          </div>
+          <div class="text-center">
+            <div class="gradient-text font-black font-kanit" style="font-size: clamp(2rem, 5vw, 3.5rem);">7天</div>
+            <div class="text-sm text-[#646973] mt-1">平均交付周期</div>
+          </div>
+          <div class="text-center">
+            <div class="gradient-text font-black font-kanit" style="font-size: clamp(2rem, 5vw, 3.5rem);">90%+</div>
+            <div class="text-sm text-[#646973] mt-1">客户满意度</div>
+          </div>
+        </div>
+
+        <!-- Contact button -->
+        <a href="#contact" class="btn-contact fade-target" data-delay="0.5" data-y="20">Contact Me</a>
+      </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section id="services" class="services-wrap relative z-10 px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 -mt-10 sm:-mt-12 md:-mt-14">
+      <div class="max-w-5xl mx-auto">
+        <!-- Heading -->
+        <h2 class="fade-target font-black uppercase text-center text-[#0C0C0C] mb-16 sm:mb-20 md:mb-28 font-kanit"
+            style="font-size: clamp(3rem, 12vw, 160px);" data-delay="0" data-y="40">
+          Services
+          <span class="block font-normal" style="font-size: 0.25em; letter-spacing: 0.15em;">服务</span>
+        </h2>
+
+        <!-- Service Items -->
+        <div class="flex flex-col">
+          <!-- 01 - 企业官网开发 -->
+          <div class="fade-target flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-8 sm:py-10 md:py-12 border-b border-[rgba(12,12,12,0.15)]" data-delay="0" data-y="30">
+            <div class="font-black text-[#0C0C0C] font-kanit flex-shrink-0" style="font-size: clamp(3rem, 10vw, 140px); line-height: 0.9;">01</div>
+            <div class="flex-1">
+              <h3 class="font-medium uppercase text-[#0C0C0C] mb-2 font-kanit" style="font-size: clamp(1rem, 2.2vw, 2.1rem);">企业官网开发</h3>
+              <p class="font-light leading-relaxed max-w-2xl text-[#0C0C0C] opacity-60" style="font-size: clamp(0.85rem, 1.6vw, 1.25rem);">
+                适合餐饮、律所、工作室等需要展示品牌的中小企业。响应式设计（PC+手机端）、SEO基础优化、域名绑定与部署、售后维护支持。
+              </p>
+              <!-- 价格展示 -->
+              <div class="mt-5 flex flex-wrap items-end gap-3">
+                <div>
+                  <span class="text-[#B600A8] font-black font-kanit" style="font-size: clamp(1.2rem, 2.5vw, 1.8rem);">¥1,500</span>
+                  <span class="text-[#646973] text-sm ml-1">起</span>
+                </div>
+                <span class="text-[#646973] text-xs line-through">市场价 ¥5,000</span>
+                <span class="text-[#B600A8] text-xs font-bold px-2 py-0.5 rounded-full" style="background: rgba(182,0,168,0.1);">约市场价 3 折</span>
+              </div>
+              <p class="mt-2 text-xs text-[#646973]">🎉 早期客户 / 初创团队优惠：<span class="text-[#B600A8] font-bold">¥1,000 起</span>（限前 20 名）</p>
+            </div>
+          </div>
+
+          <!-- 02 - 微信小程序开发 -->
+          <div class="fade-target flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-8 sm:py-10 md:py-12 border-b border-[rgba(12,12,12,0.15)]" data-delay="0.1" data-y="30">
+            <div class="font-black text-[#0C0C0C] font-kanit flex-shrink-0" style="font-size: clamp(3rem, 10vw, 140px); line-height: 0.9;">02</div>
+            <div class="flex-1">
+              <h3 class="font-medium uppercase text-[#0C0C0C] mb-2 font-kanit" style="font-size: clamp(1rem, 2.2vw, 2.1rem);">微信小程序开发</h3>
+              <p class="font-light leading-relaxed max-w-2xl text-[#0C0C0C] opacity-60" style="font-size: clamp(0.85rem, 1.6vw, 1.25rem);">
+                适合需要预约、展示、工具类小程序的商家。UI设计+开发一体、微信审核上线全流程、基础功能定制。
+              </p>
+              <!-- 价格展示 -->
+              <div class="mt-5 flex flex-wrap items-end gap-3">
+                <div>
+                  <span class="text-[#B600A8] font-black font-kanit" style="font-size: clamp(1.2rem, 2.5vw, 1.8rem);">¥2,500</span>
+                  <span class="text-[#646973] text-sm ml-1">起</span>
+                </div>
+                <span class="text-[#646973] text-xs line-through">市场价 ¥8,000</span>
+                <span class="text-[#B600A8] text-xs font-bold px-2 py-0.5 rounded-full" style="background: rgba(182,0,168,0.1);">约市场价 3 折</span>
+              </div>
+              <p class="mt-2 text-xs text-[#646973]">🎉 早期客户 / 初创团队优惠：<span class="text-[#B600A8] font-bold">¥2,000 起</span>（限前 20 名）</p>
+            </div>
+          </div>
+
+          <!-- 03 - AI效率工具整合 -->
+          <div class="fade-target flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-8 sm:py-10 md:py-12 border-b border-[rgba(12,12,12,0.15)]" data-delay="0.2" data-y="30">
+            <div class="font-black text-[#0C0C0C] font-kanit flex-shrink-0" style="font-size: clamp(3rem, 10vw, 140px); line-height: 0.9;">03</div>
+            <div class="flex-1">
+              <h3 class="font-medium uppercase text-[#0C0C0C] mb-2 font-kanit" style="font-size: clamp(1rem, 2.2vw, 2.1rem);">AI效率工具整合</h3>
+              <p class="font-light leading-relaxed max-w-2xl text-[#0C0C0C] opacity-60" style="font-size: clamp(0.85rem, 1.6vw, 1.25rem);">
+                帮助你的团队找到最适合的AI工具组合，降低人力成本。需求分析、工具选型建议、基础使用培训。
+              </p>
+              <!-- 价格展示 -->
+              <div class="mt-5 flex flex-wrap items-end gap-3">
+                <div>
+                  <span class="text-[#B600A8] font-black font-kanit" style="font-size: clamp(1.2rem, 2.5vw, 1.8rem);">¥800</span>
+                  <span class="text-[#646973] text-sm ml-1">起/次</span>
+                </div>
+                <span class="text-[#646973] text-xs line-through">市场价 ¥3,000/次</span>
+                <span class="text-[#B600A8] text-xs font-bold px-2 py-0.5 rounded-full" style="background: rgba(182,0,168,0.1);">约市场价 2.5 折</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04 - Web实战辅导 -->
+          <div class="fade-target flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-8 sm:py-10 md:py-12" data-delay="0.3" data-y="30">
+            <div class="font-black text-[#0C0C0C] font-kanit flex-shrink-0" style="font-size: clamp(3rem, 10vw, 140px); line-height: 0.9;">04</div>
+            <div class="flex-1">
+              <h3 class="font-medium uppercase text-[#0C0C0C] mb-2 font-kanit" style="font-size: clamp(1rem, 2.2vw, 2.1rem);">Web实战辅导</h3>
+              <p class="font-light leading-relaxed max-w-2xl text-[#0C0C0C] opacity-60" style="font-size: clamp(0.85rem, 1.6vw, 1.25rem);">
+                面向在校大学生的一对一Web开发指导。从课程设计需求出发，带你完成从原型到部署的完整流程，在交付作业的同时真正掌握前端开发能力。
+              </p>
+              <!-- 价格展示 -->
+              <div class="mt-5 flex flex-wrap items-end gap-3">
+                <div>
+                  <span class="text-[#B600A8] font-black font-kanit" style="font-size: clamp(1.2rem, 2.5vw, 1.8rem);">¥500</span>
+                  <span class="text-[#646973] text-sm ml-1">起/次</span>
+                </div>
+                <span class="text-[#646973] text-xs line-through">市场价 ¥2,000/次</span>
+                <span class="text-[#B600A8] text-xs font-bold px-2 py-0.5 rounded-full" style="background: rgba(182,0,168,0.1);">约市场价 2.5 折</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROJECTS SECTION ==================== -->
+    <section id="projects" class="services-wrap relative z-10 px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 bg-[#0C0C0C] -mt-10 sm:-mt-12 md:-mt-14" style="background: #0C0C0C; border-radius: 40px 40px 0 0;">
+      <div class="max-w-5xl mx-auto">
+        <!-- Heading -->
+        <h2 class="fade-target gradient-text font-black uppercase text-center mb-16 sm:mb-20 md:mb-28 font-kanit"
+            style="font-size: clamp(3rem, 12vw, 160px);" data-delay="0" data-y="40">
+          Projects
+          <span class="block font-normal" style="font-size: 0.25em; letter-spacing: 0.15em;">作品</span>
+        </h2>
+      </div>
+
+      <!-- Card Stack -->
+      <div class="project-stack-container max-w-5xl mx-auto" id="project-stack">
+
+        <!-- Project 01: SimpleIsle 极简岛 -->
+        <div class="project-stack-card h-[85vh]" style="top: 28px;" data-index="0">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <div class="flex items-center gap-4 sm:gap-6">
+              <span class="gradient-text font-black font-kanit" style="font-size: clamp(2rem, 6vw, 5rem); line-height: 0.9;">01</span>
+              <div>
+                <span class="text-xs sm:text-sm uppercase tracking-widest text-[#646973] font-kanit">Personal</span>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-medium uppercase text-[#D7E2EA] font-kanit">SimpleIsle</h3>
+                <p class="text-sm text-[#646973] mt-1">极简岛</p>
+              </div>
+            </div>
+            <a href="https://aiteamwebsitedemo.pages.dev/SimpleIsle-Demo" target="_blank" rel="noopener" class="btn-live text-xs sm:text-sm">Live Project</a>
+          </div>
+          <div class="project-img-grid">
+            <div class="project-img-col">
+              <div class="project-img" style="height: clamp(130px, 16vw, 230px); background: #1a1a1a;">
+                <img src="images/project-simpleisle-01.png" alt="SimpleIsle 首页" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="project-img" style="height: clamp(160px, 22vw, 340px); background: #1a1a1a;">
+              <img src="images/project-simpleisle-02.png" alt="SimpleIsle 菜单" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          </div>
+          <div class="project-img" style="background: #1a1a1a;">
+            <img src="images/project-simpleisle-01.png" alt="SimpleIsle 关于页" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 02: AI工具导航站 -->
+        <div class="project-stack-card h-[85vh]" style="top: 56px;" data-index="1">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <div class="flex items-center gap-4 sm:gap-6">
+              <span class="gradient-text font-black font-kanit" style="font-size: clamp(2rem, 6vw, 5rem); line-height: 0.9;">02</span>
+              <div>
+                <span class="text-xs sm:text-sm uppercase tracking-widest text-[#646973] font-kanit">Personal</span>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-medium uppercase text-[#D7E2EA] font-kanit">AI 工具导航</h3>
+                <p class="text-sm text-[#646973] mt-1">AI 导航站</p>
+              </div>
+            </div>
+            <a href="https://aiteamwebsitedemo.pages.dev/AItoolsNav" target="_blank" rel="noopener" class="btn-live text-xs sm:text-sm">Live Project</a>
+          </div>
+          <div class="project-img-grid">
+            <div class="project-img-col">
+              <div class="project-img" style="height: clamp(130px, 16vw, 230px); background: #1a1a1a;">
+                <img src="images/project-ai-01.png" alt="AI导航 搜索区" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="project-img" style="height: clamp(160px, 22vw, 340px); background: #1a1a1a;">
+              <img src="images/project-ai-02.png" alt="AI导航 卡片" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          </div>
+          <div class="project-img" style="background: #1a1a1a;">
+            <img src="images/project-ai-03.png" alt="AI导航 对比" class="w-full h-full object-cover" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 03: 预约服务小程序 -->
+      <div class="project-stack-card h-[85vh]" style="top: 84px;" data-index="2">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <div class="flex items-center gap-4 sm:gap-6">
+            <span class="gradient-text font-black font-kanit" style="font-size: clamp(2rem, 6vw, 5rem); line-height: 0.9;">03</span>
+              <div>
+                <span class="text-xs sm:text-sm uppercase tracking-widest text-[#646973] font-kanit">Client</span>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-medium uppercase text-[#D7E2EA] font-kanit">Mini App</h3>
+                <p class="text-sm text-[#646973] mt-1">预约服务小程序</p>
+              </div>
+          </div>
+          <a href="https://miniprogramdemo.pages.dev/BurnpointFitness" target="_blank" rel="noopener" class="btn-live text-xs sm:text-sm">Live Project</a>
+        </div>
+        <div class="project-img-grid">
+          <div class="project-img-col">
+            <div class="project-img" style="height: clamp(130px, 16vw, 230px); background: #1a1a1a;">
+              <img src="images/project-miniapp-01.png" alt="小程序 首页" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="project-img" style="height: clamp(160px, 22vw, 340px); background: #1a1a1a;">
+              <img src="images/project-miniapp-02.png" alt="小程序 预约" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          </div>
+          <div class="project-img" style="background: #1a1a1a;">
+            <img src="images/project-miniapp-03.png" alt="小程序 订单" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- More projects grid -->
+      <div class="max-w-5xl mx-auto mt-20">
+        <h3 class="fade-target text-center text-[#646973] uppercase tracking-widest text-sm mb-8 font-kanit" data-delay="0" data-y="20">更多作品</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div class="fade-target rounded-3xl border border-[rgba(215,226,234,0.12)] overflow-hidden bg-[#0C0C0C] hover:border-[rgba(215,226,234,0.3)] transition-all duration-300" data-delay="0" data-y="30">
+            <div style="height: 200px; background: #1a1a1a;">
+          <img src="images/project-more-lawfirm.png" alt="律所" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="p-5">
+            <h4 class="font-medium text-[#D7E2EA] mb-1">某律所官网</h4>
+            <p class="text-sm text-[#646973]">法律行业 · HTML/CSS/小程序</p>
+          </div>
+        </div>
+        <div class="fade-target rounded-3xl border border-[rgba(215,226,234,0.12)] overflow-hidden bg-[#0C0C0C] hover:border-[rgba(215,226,234,0.3)] transition-all duration-300" data-delay="0.1" data-y="30">
+          <div style="height: 200px; background: #1a1a1a;">
+            <img src="images/project-more-suishiji.png" alt="岁时记 SuishiJi" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="p-5">
+            <h4 class="font-medium text-[#D7E2EA] mb-1">岁时记 SuishiJi</h4>
+            <p class="text-sm text-[#646973]">传统文化 · HTML/CSS/JS</p>
+          </div>
+        </div>
+        <div class="fade-target rounded-3xl border border-[rgba(215,226,234,0.12)] overflow-hidden bg-[#0C0C0C] hover:border-[rgba(215,226,234,0.3)] transition-all duration-300" data-delay="0.2" data-y="30">
+          <div style="height: 200px; background: #1a1a1a;">
+            <img src="images/project-more-colorwalk.png" alt="ColorWalk 色彩漫步" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="p-5">
+              <h4 class="font-medium text-[#D7E2EA] mb-1">ColorWalk 色彩漫步</h4>
+              <p class="text-sm text-[#646973]">创意展示 · HTML/CSS/Canvas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- ==================== CONTACT SECTION ==================== -->
+    <section id="contact" class="relative min-h-screen flex items-center justify-center px-5 sm:px-8 md:px-10 py-20 bg-[#0C0C0C]">
+      <div class="max-w-6xl mx-auto w-full">
+        <!-- Heading -->
+        <h2 class="fade-target gradient-text font-black uppercase text-center mb-16 sm:mb-20 md:mb-28 font-kanit"
+            style="font-size: clamp(3rem, 12vw, 160px);" data-delay="0" data-y="40">
+          联系我
+          <span class="block font-normal" style="font-size: 0.25em; letter-spacing: 0.15em;">Contact</span>
+        </h2>
+
+        <!-- 左右布局 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+          <!-- Left: Info + QR -->
+          <div class="fade-target flex flex-col items-center md:items-start" data-delay="0.15" data-y="30">
+            <p class="text-base leading-relaxed mb-8 text-[#D7E2EA] opacity-70 text-center md:text-left">
+              如果你有任何关于官网或小程序的想法，<br class="hidden md:block">欢迎直接联系我，我通常在24小时内回复。
+            </p>
+            <div class="space-y-4 mb-8 w-full max-w-xs">
+              <div class="flex items-center justify-center md:justify-start gap-3">
+                <span class="text-[#646973] text-sm">微信号：</span>
+                <span class="text-[#D7E2EA] font-medium">_Yeahlhm</span>
+                <button class="text-sm text-[#646973] hover:text-[#D7E2EA] transition-colors px-3 py-1 rounded-lg border border-[rgba(215,226,234,0.15)]"
+                        onclick="navigator.clipboard.writeText('_Yeahlhm').then(()=>{this.textContent='已复制';setTimeout(()=>this.textContent='复制',2000)})">复制</button>
+              </div>
+              <div class="flex items-center justify-center md:justify-start gap-3">
+                <span class="text-[#646973] text-sm">邮箱：</span>
+                <span class="text-[#D7E2EA]">Yeahlxx0101@163.com</span>
+                <button class="text-sm text-[#646973] hover:text-[#D7E2EA] transition-colors px-3 py-1 rounded-lg border border-[rgba(215,226,234,0.15)]"
+                        onclick="navigator.clipboard.writeText('Yeahlxx0101@163.com').then(()=>{this.textContent='已复制';setTimeout(()=>this.textContent='复制',2000)})">复制</button>
+              </div>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+              <div class="w-44 h-44 md:w-48 md:h-48 bg-[rgba(215,226,234,0.05)] rounded-3xl flex items-center justify-center border border-[rgba(215,226,234,0.12)] shadow-[0_0_40px_rgba(182,0,168,0.08)]">
+                <img src="images/qrcode.png" alt="微信二维码" class="w-[85%] h-[85%] object-contain">
+              </div>
+              <p class="text-sm mt-4 text-[#646973] text-center md:text-left">打开微信 → 扫一扫，加我好友</p>
+            </div>
+          </div>
+
+          <!-- Right: Form -->
+          <div class="fade-target" data-delay="0.25" data-y="30">
+            <form class="space-y-4" onsubmit="const name=this.name.value,contact=this.contact.value,msg=this.message.value;if(!name||!contact){alert('请填写姓名和联系方式');return false;}window.location.href='mailto:Yeahlxx0101@163.com?subject='+encodeURIComponent('作品集留言 - '+name)+'&body='+encodeURIComponent('姓名：'+name+'\n联系方式：'+contact+'\n需求：'+msg);return false;">
+              <div>
+                <input type="text" name="name" required placeholder="您的称呼 *" class="input-dark text-sm py-3">
+              </div>
+              <div>
+                <input type="text" name="contact" required placeholder="微信号或电话 *" class="input-dark text-sm py-3">
+              </div>
+              <div>
+                <textarea name="message" placeholder="简单说说你的需求（可选）" rows="3" class="input-dark text-sm py-3" style="resize: vertical; min-height: 80px;"></textarea>
+              </div>
+              <button type="submit" class="btn-contact w-full" style="justify-content: center; font-size: 0.95rem; padding: 12px 24px;">发送留言</button>
+            </form>
+            <p class="text-xs text-[#646973] text-center mt-3">点击后会打开你的邮件客户端，发邮件给我</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="faq" class="relative min-h-screen flex items-center justify-center px-5 sm:px-8 md:px-10 py-20 bg-[#0C0C0C]">
+      <div class="max-w-3xl mx-auto w-full">
+        <h2 class="fade-target gradient-text font-black uppercase text-center mb-16 sm:mb-20 md:mb-28 font-kanit"
+            style="font-size: clamp(3rem, 12vw, 160px);" data-delay="0" data-y="40">
+          常见问题
+          <span class="block font-normal" style="font-size: 0.25em; letter-spacing: 0.15em;">FAQ</span>
+        </h2>
+
+        <div class="space-y-4" id="faq-list">
+          <div class="faq-item fade-target" data-delay="0" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>我为什么需要官网和小程序？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">官网是你24小时在线的「数字门面」——客户在百度、微信搜你名字，官网是建立第一印象的地方。<br><br>小程序是你装在客户手机里的「便捷工具」——预约、下单、查信息，比打开浏览器搜你快得多。<br><br>两者配合：官网负责「让人找到你」，小程序负责「让人用起来」，一个做品牌，一个做服务，缺一不可。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.1" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>做官网/小程序能给我带来什么实际效果？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">最直接的效果有四点：<br><br>1）<strong>被动获客</strong>——官网做好SEO，客户搜「你所在城市+你的行业」能找到你；<br><br>2）<strong>信任背书</strong>——有官网和小程序的商家，客户觉得更正规、更愿意下单；<br><br>3）<strong>降低沟通成本</strong>——常见问题官网上写清楚，小程序里能自助预约/下单，减少重复回答；<br><br>4）<strong>沉淀私域</strong>——小程序可以引导客户关注公众号、加企微，后续免费触达。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.2" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>微信小程序和美团小程序有什么区别？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">美团小程序是平台入口，流量属于美团，你要遵守平台规则、抽成、排名机制。<br><br>而独立小程序是完全属于你的：<br>1）客户数据是你的；<br>2）没有平台抽成；<br>3）可以加任何你想要的功能；<br>4）和你的官网、公众号打通，形成自己的私域流量池。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.3" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>你们的价格和市场上几万块的有什区别？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">核心区别在于<strong>复杂度和定制深度</strong>。我的定价（官网¥1,500起、小程序¥2,500起）适合大多数中小企业的展示、预约、基础电商需求，该有的功能都有，响应式、SEO、微信审核全流程都包含。<br><br>市场上几万块的项目，通常是大型电商平台、复杂的ERP对接、多语言多货币系统等，一般中小企业用不到那些功能。<br><br>我之所以能做到这个价格，是因为用AI辅助开发，效率比传统开发有明显提升，省下的成本直接让利给你。早期客户还能享受优惠价（官网¥1,000起、小程序¥2,000起），相当于市场价的2-3折。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.4" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>开发周期大概多久？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">普通企业官网通常<strong>5-7个工作日</strong>完成，微信小程序大约<strong>10-14个工作日</strong>。<br><br>我使用AI辅助开发，交付周期比市场平均（官网2-3周、小程序3-4周）快很多。<br><br>具体时间取决于内容准备情况——如果你能提前准备好文案、图片素材，并且风格需求明确，速度会更快。打包做官网+小程序的话，可以并行开发，总时间反而更短。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.5" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>后续维护怎么办？需要每年付费吗？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">交付后提供<strong>3个月免费维护期</strong>，期间修bug、改文字、换图片都不收费。<br><br>3个月之后的维护方式有两种：<br>1）<strong>按需收费</strong>——改一次报一次价，简单修改通常50-200元/次；<br>2）<strong>年维护包</strong>——¥500/年，包含每季度一次小修改+紧急bug修复。<br><br>每年固定需要续费的：域名（约60-100元/年）、服务器/托管（普通企业官网约200-500元/年）。这些是所有网站都逃不掉的成本。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.6" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>我没有文案和图片素材，你能帮我准备吗？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">能。不过为了做出<strong>符合你店铺/品牌风格</strong>的官网或小程序，建议你尽量提供：<br><br>1）<strong>品牌/店铺介绍</strong>（哪怕只是一段口头介绍，我帮你整理成文案）；<br><br>2）<strong>实拍图片</strong>（门头、产品、团队照片，比网图更有说服力）；<br><br>3）<strong>参考网站</strong>（你喜欢的风格，发链接给我）。<br><br>如果实在没有素材，我也可以用AI生成配图或推荐免费商用图库，但<strong>最好提前准备好符合你品牌调性的素材</strong>，出来的效果会好很多。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.7" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>做好了之后，以后改内容还需要每次都找你吗？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">说实话，大多数老板不想、也不会自己改代码。<br><br>我能做的是：<br>1）<strong>简单内容</strong>——我帮你把文案集中到一个文件里，改文字就像改 Word 文档一样简单；<br>2）<strong>换图片</strong>——教你用微信传图、我帮你配置好自动更新；<br><br>如果以上还是觉得麻烦，直接把新内容发给我，我帮你改，老客户按次收费（50-200元/次），响应及时。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.8" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>你看起来像学生，做出来的东西靠谱吗？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">这个问题很合理。我的回答是：往上翻看看作品案例。<br><br>咖啡馆品牌站、预约小程序、茶叶企业站——每一个都是真实落地、可以打开预览的项目。<br><br>我不是在「接单练手」，而是在用AI工具高效交付专业结果。价格和交付速度都写在这里，先看案例，觉得合适再聊。</div></div>
+          </div>
+
+          <div class="faq-item fade-target" data-delay="0.9" data-y="20">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>什么情况适合做小程序，什么情况适合做官网？</span>
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer"><div class="faq-answer-inner">简单判断：<strong>要「用」就做小程序</strong>（预约、下单、会员、工具），因为微信里打开最快、体验最顺；<strong>要「看」就做官网</strong>（品牌展示、案例介绍、SEO获客），因为百度/微信搜索都能找到。最理想的是两个都做——官网负责「让人找到你」，小程序负责「让人用起来」，我这边两个一起做价格更优惠。</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-[#0C0C0C] border-t border-[rgba(215,226,234,0.08)] py-10 px-5 sm:px-8 md:px-10">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+          <div class="text-center md:text-left">
+            <span class="font-black text-xl gradient-text font-kanit">代号大学生 / Evan</span>
+            <p class="text-sm mt-1 text-[#646973]">用技术让生意更简单，让品牌更有价值。</p>
+          </div>
+          <div class="flex gap-6 text-sm">
+            <a href="#about" class="text-[#646973] hover:text-[#D7E2EA] transition-colors">About</a>
+            <a href="#services" class="text-[#646973] hover:text-[#D7E2EA] transition-colors">Services</a>
+            <a href="#projects" class="text-[#646973] hover:text-[#D7E2EA] transition-colors">Projects</a>
+            <a href="#faq" class="text-[#646973] hover:text-[#D7E2EA] transition-colors">FAQ</a>
+            <a href="#contact" class="text-[#646973] hover:text-[#D7E2EA] transition-colors">Contact</a>
+          </div>
+        </div>
+        <div class="flex justify-between items-center pt-6 border-t border-[rgba(215,226,234,0.08)] text-xs text-[#646973]">
+          <span>&copy; 2026 代号大学生 Evan. 保留所有权利。</span>
+          <a href="#hero" class="w-10 h-10 rounded-full bg-[rgba(215,226,234,0.05)] border border-[rgba(215,226,234,0.1)] flex items-center justify-center hover:bg-[rgba(215,226,234,0.1)] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script>
+    /* ==================================================================
+       MAIN.JS — Dark 3D Creator Theme
+       ================================================================== */
+
+    document.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      initFadeIns();
+      initMarquee();
+      initProjectStack();
+      initAboutTextReveal();
+      initMagnetEffect();
+      initNavbarScroll();
+    });
+
+    /* ---------- NAVBAR SCROLL ---------- */
+    function initNavbarScroll() {
+      const nav = document.querySelector('nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.style.background = 'rgba(12, 12, 12, 0.85)';
+          nav.style.backdropFilter = 'blur(20px)';
+          nav.style.borderBottom = '1px solid rgba(215, 226, 234, 0.08)';
+        } else {
+          nav.style.background = 'transparent';
+          nav.style.backdropFilter = 'none';
+          nav.style.borderBottom = 'none';
+        }
+      }, { passive: true });
+    }
+
+    /* ---------- FADE IN ANIMATIONS ---------- */
+    function initFadeIns() {
+      document.querySelectorAll('.fade-target').forEach(el => {
+        const delay = parseFloat(el.dataset.delay) || 0;
+        const dur = parseFloat(el.dataset.dur) || 0.7;
+        const x = parseFloat(el.dataset.x) || 0;
+        const y = parseFloat(el.dataset.y) || 30;
+
+        gsap.fromTo(el,
+          { opacity: 0, x, y },
+          {
+            opacity: 1, x: 0, y: 0,
+            duration: dur,
+            delay,
+            ease: [0.25, 0.1, 0.25, 1],
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+            }
+          }
+        );
+      });
+    }
+
+    /* ---------- MARQUEE SCROLL ---------- */
+    function initMarquee() {
+      // ===== 作品集跑马灯图片配置 =====
+      const gifsRow1 = [
+        'images/project-simpleisle-01.png',
+        'images/marquee-linger-01.png',
+        'images/marquee-aitools-01.png',
+        'images/marquee-bailu-01.png',
+        'images/project-simpleisle-02.png',
+        'images/marquee-linger-02.png',
+        'images/marquee-aitools-02.png',
+        'images/marquee-fishery-01.png',
+        'images/project-more-lawfirm.png',
+        'images/project-more-suishiji.png',
+        'images/project-more-colorwalk.png',
+      ];
+
+      const gifsRow2 = [
+        'images/marquee-fungus-01.png',
+        'images/marquee-aitools-02.png',
+        'images/marquee-linger-02.png',
+        'images/project-simpleisle-02.png',
+        'images/marquee-bailu-01.png',
+        'images/marquee-aitools-01.png',
+        'images/marquee-fishery-01.png',
+        'images/project-simpleisle-01.png',
+        'images/marquee-linger-01.png',
+        'images/project-ai-01.png',
+        'images/project-miniapp-01.png',
+      ];
+
+      const row1 = document.getElementById('marquee-row-1');
+      const row2 = document.getElementById('marquee-row-2');
+
+      // Populate rows (triple for seamless scroll)
+      const triple1 = [...gifsRow1, ...gifsRow1, ...gifsRow1];
+      const triple2 = [...gifsRow2, ...gifsRow2, ...gifsRow2];
+
+      triple1.forEach(url => {
+        const tile = document.createElement('div');
+        tile.className = 'marquee-tile';
+        tile.innerHTML = `<img src="${url}" alt="" loading="lazy">`;
+        row1.appendChild(tile);
+      });
+
+      triple2.forEach(url => {
+        const tile = document.createElement('div');
+        tile.className = 'marquee-tile';
+        tile.innerHTML = `<img src="${url}" alt="" loading="lazy">`;
+        row2.appendChild(tile);
+      });
+
+      // Scroll-driven marquee
+      const marqueeSection = document.getElementById('marquee');
+      let sectionTop = 0;
+
+      ScrollTrigger.addEventListener('refresh', () => {
+        sectionTop = marqueeSection.offsetTop;
+      });
+
+      function updateMarquee() {
+        const scrollY = window.scrollY;
+        const offset = (scrollY - sectionTop + window.innerHeight) * 0.3;
+        row1.style.transform = `translateX(${offset - 200}px)`;
+        row2.style.transform = `translateX(${-(offset - 200)}px)`;
+        requestAnimationFrame(() => {});
+      }
+
+      window.addEventListener('scroll', updateMarquee, { passive: true });
+      ScrollTrigger.refresh();
+      sectionTop = marqueeSection.offsetTop;
+    }
+
+    /* ---------- PROJECT CARD STACK ---------- */
+    function initProjectStack() {
+      const cards = document.querySelectorAll('.project-stack-card');
+      const totalCards = cards.length;
+
+      cards.forEach((card, i) => {
+        const targetScale = 1 - (totalCards - 1 - i) * 0.03;
+        ScrollTrigger.create({
+          trigger: card.parentElement,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.5,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            const scale = 1 - (1 - targetScale) * Math.min(progress * (i + 1), 1);
+            card.style.transform = `scale(${scale})`;
+            card.style.transformOrigin = 'center top';
+          }
+        });
+      });
+    }
+
+    /* ---------- ABOUT TEXT CHARACTER REVEAL ---------- */
+    function initAboutTextReveal() {
+      const wrapper = document.getElementById('about-text');
+      if (!wrapper) return;
+      const lines = wrapper.querySelectorAll('.about-text-line');
+      const allChars = [];
+
+      lines.forEach(line => {
+        const text = line.textContent;
+        line.textContent = '';
+
+        for (let i = 0; i < text.length; i++) {
+          const wrapperEl = document.createElement('span');
+          wrapperEl.style.display = 'inline';
+          wrapperEl.style.position = 'relative';
+
+          const placeholder = document.createElement('span');
+          placeholder.textContent = text[i];
+          placeholder.style.visibility = 'hidden';
+
+          const visible = document.createElement('span');
+          visible.textContent = text[i];
+          visible.style.position = 'absolute';
+          visible.style.left = '0';
+          visible.style.top = '0';
+          visible.style.opacity = '0.2';
+
+          wrapperEl.appendChild(placeholder);
+          wrapperEl.appendChild(visible);
+          line.appendChild(wrapperEl);
+          allChars.push(visible);
+        }
+      });
+
+      // Scroll-driven opacity
+      gsap.to(allChars, {
+        opacity: 1,
+        stagger: {
+          each: 0.001,
+          from: 'start',
+        },
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: 0.5,
+        }
+      });
+    }
+
+    /* ---------- MAGNET EFFECT ---------- */
+    function initMagnetEffect() {
+      document.querySelectorAll('.magnet-wrap').forEach(wrap => {
+        const strength = parseFloat(wrap.dataset.strength) || 3;
+        const padding = parseFloat(wrap.dataset.padding) || 150;
+
+        wrap.addEventListener('mousemove', (e) => {
+          const rect = wrap.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const distX = e.clientX - centerX;
+          const distY = e.clientY - centerY;
+          const dist = Math.sqrt(distX * distX + distY * distY);
+
+          if (dist < padding) {
+            wrap.style.transition = 'transform 0.3s ease-out';
+            wrap.style.transform = `translate3d(${distX / strength}px, ${distY / strength}px, 0)`;
+          }
+        });
+
+        wrap.addEventListener('mouseleave', () => {
+          wrap.style.transition = 'transform 0.6s ease-in-out';
+          wrap.style.transform = 'translate3d(0, 0, 0)';
+        });
+      });
+    }
+
+    /* ---------- FAQ TOGGLE ---------- */
+    function toggleFAQ(btn) {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      // Open clicked (if wasn't already open)
+      if (!isActive) item.classList.add('active');
+    }
+  </script>
+</body>
+</html>
